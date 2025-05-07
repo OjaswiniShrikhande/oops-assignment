@@ -1,0 +1,16 @@
+#include <iostream>
+
+int main() {
+    int intValue = 42;
+    double doubleValue = 3.14159;
+
+    // Convert int to double
+    double convertedToDouble = static_cast<double>(intValue);
+    std::cout << "intValue as double: " << convertedToDouble << std::endl;
+
+    // Convert double to int
+    int convertedToInt = static_cast<int>(doubleValue);
+    std::cout << "doubleValue as int: " << convertedToInt << std::endl;
+
+    return 0;
+}
