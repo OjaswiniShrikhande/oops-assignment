@@ -1,0 +1,1202 @@
+#include <iostream>
+#include <typeinfo>
+
+class Animal {
+public:
+    virtual ~Animal() {}  // Virtual destructor to enable RTTI
+    virtual void speak() const {
+        std::cout << "Animal makes a sound\n";
+    }
+};
+
+class Dog : public Animal {
+public:
+    void speak() const override {
+        std::cout << "Woof! Woof!\n";
+    }
+    void wagTail() const {
+        std::cout << "Dog is wagging its tail\n";
+    }
+};
+
+class Cat : public Animal {
+public:
+    void speak() const override {
+        std::cout << "Meow! Meow!\n";
+    }
+    void purr() const {
+        std::cout << "Cat is purring\n";
+    }
+};
+
+int main() {
+    Animal* animal = new Dog();  // Upcast: Dog* to Animal*
+
+    // Attempt to downcast Animal* to Dog*
+    if (Dog* dog = dynamic_cast<Dog*>(animal)) {
+        std::cout << "Downcast successful: ";
+        dog->speak();
+        dog->wagTail();
+    } else {
+        std::cout << "Downcast failed\n";
+    }
+
+    // Attempt to downcast Animal* to Cat*
+    if (Cat* cat = dynamic_cast<Cat*>(animal)) {
+        std::cout << "Downcast successful: ";
+        cat->speak();
+        cat->purr();
+    } else {
+        std::cout << "Downcast failed\n";
+    }
+
+    delete animal;
+    return 0;
+}
+23.Write a C++ program to demonstrate the use of const_cast by modifying a constant variable
+#include <iostream>
+
+int main() {
+    const int num = 10;
+
+    // Attempting to modify a constant variable using const_cast
+    int& ref = const_cast<int&>(num);
+    ref = 20;
+
+    std::cout << "Original num: " << num << std::endl;
+    std::cout << "Modified through ref: " << ref << std::endl;
+
+    return 0;
+}
+24.	Write a C++ program to demonstrate the use of reinterpret_cast to convert an int to a char.
+#include <iostream>
+
+int main() {
+    int num = 65;  // ASCII value for 'A'
+
+    // Reinterpret the int as a char pointer and dereference it
+    char ch = *reinterpret_cast<char*>(&num);
+
+    std::cout << "The character representation of " << num << " is: " << ch << std::endl;
+
+    return 0;
+}
+25.	write a C++ program to demonstrate the use of C-style casting by converting an int to a double
+#include <iostream>
+
+int main() {
+    int num = 42;  // Integer value
+
+    // C-style cast to convert int to double
+    double result = (double)num;
+
+    std::cout << "Integer value: " << num << std::endl;
+    std::cout << "Converted to double: " << result << std::endl;
+
+    return 0;
+}
+26.	Write a C++ program to print the numbers from 1 to 10 using a for loop.
+#include <iostream>
+
+int main() {
+    // Using a for loop to print numbers from 1 to 10
+    for (int i = 1; i <= 10; ++i) {
+        std::cout << i << std::endl;
+    }
+    return 0;
+}
+27.	Write a C++ program to calculate the sum of the first 50 natural numbers using a while loop.
+#include <iostream>
+
+int main() {
+    int sum = 0;
+    int i = 1;
+
+    // Calculate sum using while loop
+    while (i <= 50) {
+        sum += i;
+        i++;
+    }
+
+    std::cout << "The sum of the first 50 natural numbers is: " << sum << std::endl;
+    return 0;
+}
+28.	Write a C++ program to print the multiplication table of a given number using a do-while loop.
+#include <iostream>
+
+int main() {
+    int num, i = 1;
+
+    // Prompt user for input
+    std::cout << "Enter a number: ";
+    std::cin >> num;
+
+    // Print multiplication table using do-while loop
+    do {
+        std::cout << num << " x " << i << " = " << num * i << std::endl;
+        ++i;
+    } while (i <= 10);
+
+    return 0;
+}
+29.	Write a C++ program to find the factorial of a given number using a for loop.
+#include <iostream>
+
+int main() {
+    int num;
+    unsigned long long factorial = 1;
+
+    // Prompt user for input
+    std::cout << "Enter a positive integer: ";
+    std::cin >> num;
+
+    // Check if the input is negative
+    if (num < 0)
+        std::cout << "Error! Factorial of a negative number doesn't exist.";
+    else {
+        // Calculate factorial using for loop
+        for (int i = 1; i <= num; ++i) {
+            factorial *= i;
+        }
+        // Output the result
+        std::cout << "Factorial of " << num << " = " << factorial;
+    }
+  return 0;
+}
+30.	Write a C++ program to reverse a given number using a while loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int num, reversed_number = 0, remainder;
+
+    // Prompt user for input
+    cout << "Enter an integer: ";
+    cin >> num;
+
+    // Reverse the number using a while loop
+    while (num != 0) {
+        remainder = num % 10;               // Get the last digit
+        reversed_number = reversed_number * 10 + remainder; // Build the reversed number
+        num /= 10;                          // Remove the last digit
+    }
+
+    cout << "Reversed Number = " << reversed_number << endl;
+    return 0;
+}
+31.	Write a C++ program to check if a given number is a prime number using a for loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int num;
+    bool is_prime = true;
+
+    // Prompt user for input
+    cout << "Enter a positive integer: ";
+    cin >> num;
+
+    // Handle edge cases
+    if (num <= 1) {
+        is_prime = false;
+    } else {
+        // Check divisibility from 2 to sqrt(num)
+        for (int i = 2; i * i <= num; ++i) {
+            if (num % i == 0) {
+                is_prime = false;
+                break;
+            }
+        }
+    }
+
+    // Output result
+    if (is_prime)
+        cout << num << " is a prime number." << endl;
+    else
+        cout << num << " is not a prime number." << endl;
+
+    return 0;
+}
+32.	Write a C++ program to print the Fibonacci series up to a given number of terms using a for loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, t1 = 0, t2 = 1, nextTerm = 0;
+
+    // Prompt user for input
+    cout << "Enter the number of terms: ";
+    cin >> n;
+
+    // Print the Fibonacci series
+    cout << "Fibonacci Series: ";
+
+    for (int i = 1; i <= n; ++i) {
+        if (i == 1) {
+            cout << t1 << ", ";
+            continue;
+        }
+        if (i == 2) {
+            cout << t2 << ", ";
+            continue;
+        }
+        nextTerm = t1 + t2;
+        t1 = t2;
+        t2 = nextTerm;
+
+        cout << nextTerm;
+        if (i != n) cout << ", ";
+    }
+
+    cout << endl;
+    return 0;
+}
+33.	Write a C++ program to count the number of digits in a given number using a while loop.
+#include <iostream>
+#include <cmath>
+
+int main() {
+    int num, digitCount = 0;
+
+    // Prompt user for input
+    std::cout << "Enter a number: ";
+    std::cin >> num;
+
+    // Handle negative numbers
+    num = std::abs(num);
+
+    // Special case for 0
+    if (num == 0) {
+        digitCount = 1;
+    } else {
+        // Count digits using while loop
+        while (num != 0) {
+            num /= 10;
+            ++digitCount;
+        }
+    }
+
+    std::cout << "Number of digits: " << digitCount << std::endl;
+    return 0;
+}
+34.	Write a C++ program to print the sum of all even numbers between 1 and 100 using a for loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int sum = 0;
+
+    // Loop through numbers from 1 to 100
+    for (int i = 2; i <= 100; i += 2) {
+        sum += i;  // Add the even number to sum
+    }
+
+    cout << "Sum of all even numbers between 1 and 100 is: " << sum << endl;
+    return 0;
+}
+35.	Write a C++ program to find the largest number in an array using a for loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+
+    // Prompt user for the number of elements
+    cout << "Enter the number of elements: ";
+    cin >> n;
+
+    int arr[n];
+
+    // Input elements into the array
+    cout << "Enter " << n << " elements:\n";
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+
+    // Initialize max with the first element
+    int max = arr[0];
+
+    // Traverse the array to find the maximum element
+    for (int i = 1; i < n; ++i) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+
+    // Output the largest element
+    cout << "The largest element is: " << max << endl;
+
+    return 0;
+}
+36.	Write a C++ program to print the elements of an array in reverse order using a for loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+
+    // Prompt user for the number of elements
+    cout << "Enter the number of elements: ";
+    cin >> n;
+
+    int arr[n];
+
+    // Input elements into the array
+    cout << "Enter " << n << " elements:\n";
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+    }
+
+    // Print the array in reverse order
+    cout << "Array in reverse order:\n";
+    for (int i = n - 1; i >= 0; --i) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+37.	Write a C++ program to calculate the average of numbers in an array using a for loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    float sum = 0.0, average;
+
+    // Prompt user for the number of elements
+    cout << "Enter the number of elements: ";
+    cin >> n;
+
+    float arr[n];
+
+    // Input elements into the array
+    cout << "Enter " << n << " numbers:\n";
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
+        sum += arr[i];
+    }
+
+    // Calculate the average
+    average = sum / n;
+
+    // Output the average
+    cout << "Average = " << average << endl;
+
+    return 0;
+}
+38.	Write a C++ program to find the GCD (Greatest Common Divisor) of two numbers using a while loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int num1, num2;
+
+    // Prompt user for input
+    cout << "Enter two numbers: ";
+    cin >> num1 >> num2;
+
+    // Ensure both numbers are positive
+    if (num1 <= 0 || num2 <= 0) {
+        cout << "Please enter positive integers only." << endl;
+        return 1;
+    }
+
+    // Implementing Euclid's algorithm using subtraction method
+    while (num1 != num2) {
+        if (num1 > num2)
+            num1 -= num2;
+        else
+            num2 -= num1;
+    }
+
+    // Output the GCD
+    cout << "GCD = " << num1 << endl;
+    return 0;
+}
+39.	Write a C++ program to print all the prime numbers between 1 and 100 using a for loop.
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool isPrime(int n) {
+    if (n <= 1) return false;
+    for (int i = 2; i <= sqrt(n); ++i) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+
+int main() {
+    cout << "Prime numbers between 1 and 100 are:\n";
+    for (int i = 2; i <= 100; ++i) {
+        if (isPrime(i)) {
+            cout << i << " ";
+        }
+    }
+    cout << endl;
+    return 0;
+}
+40.	Write a C++ program to find the sum of the digits of a given number using a while loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int num, sum = 0;
+
+    // Prompt user for input
+    cout << "Enter a number: ";
+    cin >> num;
+
+    // Handle negative numbers by converting to positive
+    num = abs(num);
+
+    // Calculate sum of digits using while loop
+    while (num > 0) {
+        sum += num % 10;  // Add last digit to sum
+        num /= 10;        // Remove last digit
+    }
+
+    // Output the sum of digits
+    cout << "Sum of digits: " << sum << endl;
+    return 0;
+}
+41.	Write a C++ program to check if a given number is a palindrome using a while loop.
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool isPalindrome(int n) {
+    int original = abs(n);  // Handle negative numbers
+    int reversed = 0;
+
+    while (original > 0) {
+        int digit = original % 10;
+        reversed = reversed * 10 + digit;
+        original /= 10;
+    }
+
+    return abs(n) == reversed;
+}
+
+int main() {
+    int n;
+    cout << "Enter a number: ";
+    cin >> n;
+
+    if (isPalindrome(n)) {
+        cout << n << " is a palindrome number." << endl;
+    } else {
+        cout << n << " is not a palindrome number." << endl;
+    }
+
+    return 0;
+}
+42.	Write a C++ program to find the smallest number in an array using a for loop.
+#include <iostream>
+#include <climits> // For INT_MAX
+
+int main() {
+    int n;
+
+    // Prompt user for the number of elements
+    std::cout << "Enter the number of elements: ";
+    std::cin >> n;
+
+    // Ensure the array size is positive
+    if (n <= 0) {
+        std::cout << "Array size must be greater than 0." << std::endl;
+        return 1;
+    }
+
+    int arr[n];
+
+    // Input elements into the array
+    std::cout << "Enter " << n << " elements:\n";
+    for (int i = 0; i < n; ++i) {
+        std::cin >> arr[i];
+    }
+
+    // Initialize min with the maximum possible integer value
+    int min = INT_MAX;
+
+    // Loop through the array to find the smallest element
+    for (int i = 0; i < n; ++i) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+
+    // Output the smallest element
+    std::cout << "The smallest element is: " << min << std::endl;
+
+    return 0;
+}
+43.	Write a C++ program to print the first N even numbers using a for loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+
+    // Prompt user for the number of even numbers to print
+    cout << "Enter the number of even numbers to print: ";
+    cin >> N;
+
+    // Loop to print the first N even numbers
+    cout << "First " << N << " even numbers are:\n";
+    for (int i = 0; i < N; ++i) {
+        cout << 2 * i << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+44.	Write a C++ program to print a pattern using nested for loops.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int rows;
+
+    // Prompt user for the number of rows
+    cout << "Enter the number of rows: ";
+    cin >> rows;
+
+    // Outer loop for each row
+    for (int i = 1; i <= rows; ++i) {
+        // Inner loop for spaces
+        for (int j = 1; j <= rows - i; ++j) {
+            cout << " ";
+        }
+
+        // Inner loop for stars
+        for (int k = 1; k <= i; ++k) {
+            cout << "* ";
+        }
+
+        cout << endl;
+    }
+
+    return 0;
+}
+45.	Write a C++ program to print the numbers from 1 to 100, but replace multiples of 3 with "Fizz" and multiples of 5 with "Buzz" using a for loop
+#include <iostream>
+using namespace std;
+
+int main() {
+    // Loop through numbers from 1 to 100
+    for (int i = 1; i <= 100; ++i) {
+        // Check if the number is divisible by both 3 and 5
+        if (i % 3 == 0 && i % 5 == 0) {
+            cout << "FizzBuzz";
+        }
+        // Check if the number is divisible by 3
+        else if (i % 3 == 0) {
+            cout << "Fizz";
+        }
+        // Check if the number is divisible by 5
+        else if (i % 5 == 0) {
+            cout << "Buzz";
+        }
+        // If none of the above, print the number
+        else {
+            cout << i;
+        }
+        cout << endl; // Move to the next line
+    }
+
+    return 0;
+}
+46.	Write a C++ program to calculate the sum of digits of a given number using a while loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int num, sum = 0;
+
+    // Prompt user for input
+    cout << "Enter a number: ";
+    cin >> num;
+
+    // Handle negative numbers by converting to positive
+    num = abs(num);
+
+    // Calculate sum of digits using while loop
+    while (num > 0) {
+        sum += num % 10;  // Add last digit to sum
+        num /= 10;        // Remove last digit
+    }
+
+    // Output the sum of digits
+    cout << "Sum of digits: " << sum << endl;
+    return 0;
+}
+47.	Write a C++ program to reverse a given string using a for loop.
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string str;
+
+    // Prompt user for input
+    cout << "Enter a string: ";
+    getline(cin, str);
+
+    // Reverse the string using a for loop
+    cout << "Reversed string: ";
+    for (int i = str.length() - 1; i >= 0; --i) {
+        cout << str[i];
+    }
+    cout << endl;
+
+    return 0;
+}
+48.	Write a C++ program to check if a given number is an Armstrong number using a while loop
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() {
+    int num, originalNum, remainder, result = 0, n = 0;
+
+    // Prompt user for input
+    cout << "Enter an integer: ";
+    cin >> num;
+
+    originalNum = num;
+
+    // Count the number of digits
+    while (originalNum != 0) {
+        originalNum /= 10;
+        ++n;
+    }
+
+    originalNum = num;
+
+    // Calculate the sum of each digit raised to the power of n
+    while (originalNum != 0) {
+        remainder = originalNum % 10;
+        result += pow(remainder, n);
+        originalNum /= 10;
+    }
+
+    // Check if the sum is equal to the original number
+    if (result == num)
+        cout << num << " is an Armstrong number." << endl;
+    else
+        cout << num << " is not an Armstrong number." << endl;
+
+    return 0;
+}
+49.	Write a C++ program to find the sum of all elements in an array using a for loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5}; // Initialize the array
+    int size = sizeof(arr) / sizeof(arr[0]); // Calculate the size of the array
+    int sum = 0; // Initialize sum to zero
+
+    // Loop through the array to calculate the sum
+    for (int i = 0; i < size; ++i) {
+        sum += arr[i];
+    }
+
+    // Output the sum
+    cout << "Sum of array elements: " << sum << endl;
+
+    return 0;
+}
+50.	Write a C++ program to check if a given number is a palindrome using a while loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int num, reversedNum = 0, remainder, originalNum;
+
+    // Prompt user for input
+    cout << "Enter an integer: ";
+    cin >> num;
+
+    originalNum = num;
+
+    // Reverse the number
+    while (num != 0) {
+        remainder = num % 10;             // Get the last digit
+        reversedNum = reversedNum * 10 + remainder; // Append it to reversedNum
+        num /= 10;                        // Remove the last digit
+    }
+
+    // Check if the original number is equal to its reversed version
+    if (originalNum == reversedNum)
+        cout << originalNum << " is a palindrome." << endl;
+    else
+        cout << originalNum << " is not a palindrome." << endl;
+
+    return 0;
+}
+51.	Write a C++ program to find the sum of all even and odd numbers between 1 and 100 using separate for loops.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int evenSum = 0, oddSum = 0;
+
+    // Sum of even numbers
+    for (int i = 2; i <= 100; i += 2) {
+        evenSum += i;
+    }
+
+    // Sum of odd numbers
+    for (int i = 1; i <= 100; i += 2) {
+        oddSum += i;
+    }
+
+    // Output the results
+    cout << "Sum of even numbers between 1 and 100: " << evenSum << endl;
+    cout << "Sum of odd numbers between 1 and 100: " << oddSum << endl;
+
+    return 0;
+}
+52.	Write a C++ program to count the number of vowels and consonants in a given string using a for loop.
+#include <iostream>
+#include <string>
+#include <cctype> // For tolower() function
+
+using namespace std;
+
+int main() {
+    string str;
+    int vowels = 0, consonants = 0;
+
+    // Prompt user for input
+    cout << "Enter a string: ";
+    getline(cin, str);
+
+    // Loop through each character in the string
+    for (int i = 0; i < str.length(); i++) {
+        char ch = tolower(str[i]); // Convert character to lowercase
+
+        // Check if the character is a vowel
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+            vowels++;
+        }
+        // Check if the character is a consonant
+        else if (isalpha(ch)) { // isalpha() checks if the character is an alphabet
+            consonants++;
+        }
+    }
+
+    // Output the results
+    cout << "Number of vowels: " << vowels << endl;
+    cout << "Number of consonants: " << consonants << endl;
+
+    return 0;
+}
+53.	Write a C++ program to convert a binary number to a decimal number using a while loop.
+#include <iostream>
+#include <cmath> // For pow() function
+
+using namespace std;
+
+int main() {
+    long long binary;
+    int decimal = 0, i = 0, remainder;
+
+    // Prompt user for input
+    cout << "Enter a binary number: ";
+    cin >> binary;
+
+    // Convert binary to decimal
+    while (binary != 0) {
+        remainder = binary % 10;               // Extract last digit
+        decimal += remainder * pow(2, i);      // Add to decimal value
+        binary /= 10;                          // Remove last digit
+        ++i;                                   // Increment power of 2
+    }
+
+    // Output the result
+    cout << "Decimal equivalent: " << decimal << endl;
+
+    return 0;
+}
+54.	Write a C++ program to print all prime numbers between two given numbers using a for loop.
+#include <iostream>
+using namespace std;
+
+bool isPrime(int num) {
+    if (num <= 1) return false; // 0 and 1 are not prime numbers
+    for (int i = 2; i <= num / 2; ++i) {
+        if (num % i == 0) return false; // num is divisible by i, hence not prime
+    }
+    return true; // num is prime
+}
+
+int main() {
+    int start, end;
+
+    // Input the range
+    cout << "Enter the range (start and end): ";
+    cin >> start >> end;
+
+    cout << "Prime numbers between " << start << " and " << end << " are: ";
+    for (int num = start; num <= end; ++num) {
+        if (isPrime(num)) {
+            cout << num << " ";
+        }
+    }
+    cout << endl;
+
+    return 0;
+}
+55.	Write a C++ program to find the transpose of a given matrix using nested for loops.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int rows, cols;
+
+    // Input the dimensions of the matrix
+    cout << "Enter number of rows: ";
+    cin >> rows;
+    cout << "Enter number of columns: ";
+    cin >> cols;
+
+    int matrix[rows][cols], transpose[cols][rows];
+
+    // Input elements of the matrix
+    cout << "Enter elements of the matrix:\n";
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cin >> matrix[i][j];
+        }
+    }
+
+    // Compute the transpose of the matrix
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            transpose[j][i] = matrix[i][j];
+        }
+    }
+
+    // Output the transposed matrix
+    cout << "Transpose of the matrix:\n";
+    for (int i = 0; i < cols; i++) {
+        for (int j = 0; j < rows; j++) {
+            cout << transpose[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+56.	Write a C++ program to calculate the sum of the harmonic series up to n terms using a for loop.
+#include <iostream>
+#include <iomanip> // For setting precision
+
+int main() {
+    int n;
+    double sum = 0.0;
+
+    // Input the number of terms
+    std::cout << "Enter the number of terms: ";
+    std::cin >> n;
+
+    // Calculate the sum of the harmonic series
+    for (int i = 1; i <= n; ++i) {
+        sum += 1.0 / i;
+    }
+
+    // Output the result with fixed precision
+    std::cout << "Sum of the harmonic series up to " << n << " terms: ";
+    std::cout << std::fixed << std::setprecision(5) << sum << std::endl;
+
+    return 0;
+}
+57.	Write a C++ program to find duplicate elements in an array using nested for loops.
+#include <iostream>
+#include <vector>
+#include <algorithm> // For std::find
+
+using namespace std;
+
+vector<int> findDuplicates(const vector<int>& arr) {
+    vector<int> duplicates;
+    int n = arr.size();
+
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = i + 1; j < n; ++j) {
+            if (arr[i] == arr[j]) {
+                // Check if the duplicate is already in the result
+                if (find(duplicates.begin(), duplicates.end(), arr[i]) == duplicates.end()) {
+                    duplicates.push_back(arr[i]);
+                }
+                break; // No need to check further once a duplicate is found
+            }
+        }
+    }
+
+    return duplicates;
+}
+
+int main() {
+    vector<int> arr = {12, 11, 40, 12, 5, 6, 5, 12, 11};
+    vector<int> duplicates = findDuplicates(arr);
+
+    if (!duplicates.empty()) {
+        cout << "Duplicate elements: ";
+        for (int num : duplicates) {
+            cout << num << " ";
+        }
+        cout << endl;
+    } else {
+        cout << "No duplicates found." << endl;
+    }
+
+    return 0;
+}
+58.	Write a C++ program to print a pyramid pattern using nested for loops.
+
+   *
+  * *
+ * * *
+* * * *
+#include <iostream>
+using namespace std;
+
+int main() {
+    int rows = 4; // Number of rows for the pyramid
+
+    // Outer loop for each row
+    for (int i = 1; i <= rows; ++i) {
+        // Inner loop for leading spaces
+        for (int j = i; j < rows; ++j) {
+            cout << " ";
+        }
+        // Inner loop for printing stars
+        for (int k = 1; k <= i; ++k) {
+            cout << "* ";
+        }
+        // Move to the next line after each row
+        cout << endl;
+    }
+
+    return 0;
+}
+59.	Write a C++ program to find the LCM (Least Common Multiple) of two numbers using a while loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int num1, num2, lcm, max;
+
+    // Input two numbers
+    cout << "Enter two positive integers: ";
+    cin >> num1 >> num2;
+
+    // Determine the maximum of the two numbers
+    max = (num1 > num2) ? num1 : num2;
+
+    // Find the LCM using a while loop
+    lcm = max;
+    while (true) {
+        if (lcm % num1 == 0 && lcm % num2 == 0) {
+            cout << "LCM of " << num1 << " and " << num2 << " is " << lcm << endl;
+            break;
+        }
+        lcm += max; // Increment by the maximum number
+    }
+
+    return 0;
+}
+60.	Write a C++ program to generate the Fibonacci series up to n terms using a for loop.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, t1 = 0, t2 = 1, nextTerm;
+
+    // Input the number of terms
+    cout << "Enter the number of terms: ";
+    cin >> n;
+
+    cout << "Fibonacci Series: ";
+
+    // Print the first two terms
+    if (n >= 1) cout << t1 << " ";
+    if (n >= 2) cout << t2 << " ";
+
+    // Generate and print the remaining terms
+    for (int i = 3; i <= n; ++i) {
+        nextTerm = t1 + t2;
+        cout << nextTerm << " ";
+        t1 = t2;
+        t2 = nextTerm;
+    }
+
+    cout << endl;
+    return 0;
+}
+61.	Write a C++ program to add two matrices using nested for loops.
+#include <iostream>
+using namespace std;
+
+int main() {
+    int rows, cols;
+
+    // Input the number of rows and columns
+    cout << "Enter number of rows: ";
+    cin >> rows;
+    cout << "Enter number of columns: ";
+    cin >> cols;
+
+    int matrix1[rows][cols], matrix2[rows][cols], sum[rows][cols];
+
+    // Input elements for the first matrix
+    cout << "Enter elements of first matrix:\n";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            cout << "Element [" << i + 1 << "][" << j + 1 << "]: ";
+            cin >> matrix1[i][j];
+        }
+    }
+
+    // Input elements for the second matrix
+    cout << "Enter elements of second matrix:\n";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            cout << "Element [" << i + 1 << "][" << j + 1 << "]: ";
+            cin >> matrix2[i][j];
+        }
+    }
+
+    // Add the two matrices
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            sum[i][j] = matrix1[i][j] + matrix2[i][j];
+        }
+    }
+
+    // Output the resultant matrix
+    cout << "Sum of the two matrices:\n";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            cout << sum[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+62.	Write a C++ program to create a number guessing game where the user has to guess a number between 1 and 100 using a while loop.
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+int main() {
+    int secretNumber, userGuess;
+
+    // Initialize random seed
+    std::srand(std::time(nullptr));
+
+    // Generate a random number between 1 and 100
+    secretNumber = std::rand() % 100 + 1;
+
+    std::cout << "Welcome to the Number Guessing Game!\n";
+    std::cout << "I'm thinking of a number between 1 and 100.\n";
+    std::cout << "Can you guess what it is?\n";
+
+    // Start the guessing loop
+    while (true) {
+        std::cout << "Enter your guess: ";
+        std::cin >> userGuess;
+
+        // Validate input
+        if (std::cin.fail()) {
+            std::cin.clear(); // clear input buffer
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
+            std::cout << "Please enter a valid number.\n";
+            continue;
+        }
+
+        // Check if the guess is correct
+        if (userGuess == secretNumber) {
+            std::cout << "Congratulations! You guessed the number correctly.\n";
+            break;
+        }
+        // Provide hints
+        else if (userGuess < secretNumber) {
+            std::cout << "Too low! Try again.\n";
+        } else {
+            std::cout << "Too high! Try again.\n";
+        }
+    }
+
+    return 0;
+}
+63.	Write a C++ program to count the frequency of each character in a string using a for loop.
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string str;
+    cout << "Enter a string: ";
+    getline(cin, str);  // Read the entire line including spaces
+
+    int freq[256] = {0};  // Array to store frequency of each character
+
+    // Traverse the string and count frequency of each character
+    for (int i = 0; i < str.length(); ++i) {
+        freq[str[i]]++;
+    }
+
+    // Display the frequency of each character
+    cout << "Character frequencies:\n";
+    for (int i = 0; i < 256; ++i) {
+        if (freq[i] > 0) {
+            cout << "'" << char(i) << "' : " << freq[i] << endl;
+        }
+    }
+
+    return 0;
+}
+64.	Write a C++ program to convert a decimal number to a binary number using a while loop.
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int decimal;
+    cout << "Enter a decimal number: ";
+    cin >> decimal;
+
+    // Handle the case when the input is zero
+    if (decimal == 0) {
+        cout << "Binary equivalent: 0" << endl;
+        return 0;
+    }
+
+    vector<int> binaryDigits;
+
+    // Convert decimal to binary
+    while (decimal > 0) {
+        binaryDigits.push_back(decimal % 2);
+        decimal /= 2;
+    }
+
+    // Output the binary equivalent
+    cout << "Binary equivalent: ";
+    for (auto it = binaryDigits.rbegin(); it != binaryDigits.rend(); ++it) {
+        cout << *it;
+    }
+    cout << endl;
+
+    return 0;
+}
+
+
