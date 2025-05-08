@@ -1,0 +1,2471 @@
+1.Create a class Person with private attributes name, age, and public methods to set and 
+get the values. 
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Person {
+private:
+    // Private attributes
+    string name;
+    int age;
+
+public:
+    // Setter method for name
+    void setName(string n) {
+        name = n;
+    }
+
+    // Setter method for age
+    void setAge(int a) {
+        if (a >= 0) {
+            age = a;
+        } else {
+            cout << "Age cannot be negative!" << endl;
+        }
+    }
+
+    // Getter method for name
+    string getName() {
+        return name;
+    }
+
+    // Getter method for age
+    int getAge() {
+        return age;
+    }
+};
+
+int main() {
+    Person person;
+
+    // Set values using setter methods
+    person.setName("John Doe");
+    person.setAge(30);
+
+    // Get values using getter methods
+    cout << "Person's Name: " << person.getName() << endl;
+    cout << "Person's Age: " << person.getAge() << endl;
+
+    return 0;
+}
+2. Implement a class Student that inherits from Person and adds a private attribute 
+studentID with appropriate methods. 
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class Person
+class Person {
+private:
+    string name;
+    int age;
+
+public:
+    // Setter method for name
+    void setName(string n) {
+        name = n;
+    }
+
+    // Setter method for age
+    void setAge(int a) {
+        if (a >= 0) {
+            age = a;
+        } else {
+            cout << "Age cannot be negative!" << endl;
+        }
+    }
+
+    // Getter method for name
+    string getName() {
+        return name;
+    }
+
+    // Getter method for age
+    int getAge() {
+        return age;
+    }
+};
+
+// Derived class Student, inheriting from Person
+class Student : public Person {
+private:
+    string studentID;  // New attribute specific to Student
+
+public:
+    // Setter method for studentID
+    void setStudentID(string id) {
+        studentID = id;
+    }
+
+    // Getter method for studentID
+    string getStudentID() {
+        return studentID;
+    }
+
+    // Method to display student information
+    void displayStudentInfo() {
+        cout << "Student Name: " << getName() << endl;
+        cout << "Student Age: " << getAge() << endl;
+        cout << "Student ID: " << getStudentID() << endl;
+    }
+};
+
+int main() {
+    // Create a Student object
+    Student student;
+
+    // Set data for the student using inherited methods
+    student.setName("Alice Smith");
+    student.setAge(20);
+    student.setStudentID("S12345");
+
+    // Display student information
+    student.displayStudentInfo();
+
+    return 0;
+}
+3. Design a class Car with attributes for make, model, and year. Include methods to display 
+car details.
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Car {
+private:
+    string make;    // The manufacturer of the car
+    string model;   // The model of the car
+    int year;       // The year the car was manufactured
+
+public:
+    // Constructor to initialize the car's details
+    Car(string m, string mod, int y) {
+        make = m;
+        model = mod;
+        year = y;
+    }
+
+    // Method to display the details of the car
+    void displayCarDetails() {
+        cout << "Car Make: " << make << endl;
+        cout << "Car Model: " << model << endl;
+        cout << "Car Year: " << year << endl;
+    }
+};
+
+int main() {
+    // Create a Car object and initialize it with values
+    Car myCar("Toyota", "Corolla", 2020);
+
+    // Display the details of the car
+    myCar.displayCarDetails();
+
+    return 0;
+}
+4. Write a program that creates an array of Car objects and displays their details. 
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Car {
+private:
+    string make;    // The manufacturer of the car
+    string model;   // The model of the car
+    int year;       // The year the car was manufactured
+
+public:
+    // Constructor to initialize the car's details
+    Car(string m, string mod, int y) {
+        make = m;
+        model = mod;
+        year = y;
+    }
+
+    // Method to display the details of the car
+    void displayCarDetails() const {
+        cout << "Car Make: " << make << endl;
+        cout << "Car Model: " << model << endl;
+        cout << "Car Year: " << year << endl;
+        cout << "----------------------" << endl;
+    }
+};
+
+int main() {
+    // Create an array of Car objects
+    Car cars[] = {
+        Car("Toyota", "Corolla", 2020),
+        Car("Honda", "Civic", 2019),
+        Car("Ford", "Mustang", 2021),
+        Car("Chevrolet", "Malibu", 2018)
+    };
+
+    // Find the size of the array
+    int numCars = sizeof(cars) / sizeof(cars[0]);
+
+    // Display details of each car using a loop
+    for (int i = 0; i < numCars; i++) {
+        cout << "Car " << (i + 1) << " Details:" << endl;
+        cars[i].displayCarDetails();
+    }
+
+    return 0;
+}
+5.Implement a class BankAccount with private attributes for account number, balance, and 
+public methods for depositing and withdrawing money.
+#include <iostream>
+#include <string>
+using namespace std;
+
+class BankAccount {
+private:
+    string accountNumber;  // The account number
+    double balance;        // The balance of the account
+
+public:
+    // Constructor to initialize account details
+    BankAccount(string accNum, double initialBalance) {
+        accountNumber = accNum;
+        if (initialBalance >= 0) {
+            balance = initialBalance;
+        } else {
+            cout << "Initial balance cannot be negative. Setting balance to 0." << endl;
+            balance = 0;
+        }
+    }
+
+    // Method to deposit money into the account
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            cout << "Deposited $" << amount << ". New balance: $" << balance << endl;
+        } else {
+            cout << "Deposit amount must be positive." << endl;
+        }
+    }
+
+    // Method to withdraw money from the account
+    void withdraw(double amount) {
+        if (amount > 0) {
+            if (amount <= balance) {
+                balance -= amount;
+                cout << "Withdrew $" << amount << ". New balance: $" << balance << endl;
+            } else {
+                cout << "Insufficient funds. Withdrawal denied." << endl;
+            }
+        } else {
+            cout << "Withdrawal amount must be positive." << endl;
+        }
+    }
+
+    // Method to display account details
+    void displayAccountDetails() const {
+        cout << "Account Number: " << accountNumber << endl;
+        cout << "Account Balance: $" << balance << endl;
+    }
+};
+
+int main() {
+    // Create a BankAccount object
+    BankAccount myAccount("123456789", 1000.00);
+
+    // Display initial account details
+    myAccount.displayAccountDetails();
+
+    // Deposit money
+    myAccount.deposit(500.00);
+
+    // Withdraw money
+    myAccount.withdraw(200.00);
+
+    // Attempt an invalid withdrawal (greater than available balance)
+    myAccount.withdraw(1500.00);
+
+    // Display updated account details
+    myAccount.displayAccountDetails();
+
+    return 0;
+}
+6. Create a class Rectangle with private attributes for length and width, and public methods 
+to calculate area and perimeter.
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+private:
+    double length;  // The length of the rectangle
+    double width;   // The width of the rectangle
+
+public:
+    // Constructor to initialize the length and width
+    Rectangle(double l, double w) {
+        length = l;
+        width = w;
+    }
+
+    // Method to calculate the area of the rectangle
+    double area() {
+        return length * width;
+    }
+
+    // Method to calculate the perimeter of the rectangle
+    double perimeter() {
+        return 2 * (length + width);
+    }
+
+    // Method to display the details of the rectangle
+    void displayRectangleDetails() const {
+        cout << "Length: " << length << endl;
+        cout << "Width: " << width << endl;
+        cout << "Area: " << area() << endl;
+        cout << "Perimeter: " << perimeter() << endl;
+    }
+};
+
+int main() {
+    // Create a Rectangle object with length 5 and width 3
+    Rectangle rect(5.0, 3.0);
+
+    // Display the details of the rectangle
+    rect.displayRectangleDetails();
+
+    return 0;
+}
+7.Write a class Employee with private attributes name, position, and salary, and public 
+methods to display employee details.
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Employee {
+private:
+    string name;      // Employee's name
+    string position;  // Employee's position
+    double salary;    // Employee's salary
+
+public:
+    // Constructor to initialize the employee's details
+    Employee(string n, string p, double s) {
+        name = n;
+        position = p;
+        salary = s;
+    }
+
+    // Method to display the employee's details
+    void displayEmployeeDetails() const {
+        cout << "Employee Name: " << name << endl;
+        cout << "Position: " << position << endl;
+        cout << "Salary: $" << salary << endl;
+    }
+};
+
+int main() {
+    // Create an Employee object with name, position, and salary
+    Employee emp("John Doe", "Software Engineer", 75000.00);
+
+    // Display the employee's details
+    emp.displayEmployeeDetails();
+
+    return 0;
+}
+8.Create a class Counter with a static data member to count the number of objects created.
+#include <iostream>
+using namespace std;
+
+class Counter {
+private:
+    static int count;  // Static data member to count the number of objects
+
+public:
+    // Constructor that increments the count each time an object is created
+    Counter() {
+        count++;  // Increment count every time an object is created
+    }
+
+    // Static function to get the current count
+    static int getCount() {
+        return count;
+    }
+
+    // Destructor that decrements the count each time an object is destroyed
+    ~Counter() {
+        count--;  // Decrement count when an object is destroyed
+    }
+};
+
+// Initialize the static data member outside the class
+int Counter::count = 0;
+
+int main() {
+    // Create some Counter objects
+    Counter c1;
+    Counter c2;
+    Counter c3;
+
+    // Display the number of Counter objects created
+    cout << "Number of Counter objects created: " << Counter::getCount() << endl;
+
+    // Create and destroy a Counter object
+    {
+        Counter c4;
+        cout << "Number of Counter objects created: " << Counter::getCount() << endl;
+    }
+
+    // After c4 goes out of scope, the count will decrease
+    cout << "Number of Counter objects created: " << Counter::getCount() << endl;
+
+    return 0;
+}
+9. Implement a class Math with static function members for basic arithmetic operations. 
+#include <iostream>
+using namespace std;
+
+class Math {
+public:
+    // Static function for addition
+    static int add(int a, int b) {
+        return a + b;
+    }
+
+    // Static function for subtraction
+    static int subtract(int a, int b) {
+        return a - b;
+    }
+
+    // Static function for multiplication
+    static int multiply(int a, int b) {
+        return a * b;
+    }
+
+    // Static function for division
+    static double divide(int a, int b) {
+        if (b == 0) {
+            cout << "Error! Division by zero." << endl;
+            return 0; // Returning 0 as error case for division by zero
+        }
+        return static_cast<double>(a) / b;
+    }
+};
+
+int main() {
+    int x = 10, y = 5;
+
+    // Using static functions of Math class without creating an object
+    cout << "Addition: " << Math::add(x, y) << endl;
+    cout << "Subtraction: " << Math::subtract(x, y) << endl;
+    cout << "Multiplication: " << Math::multiply(x, y) << endl;
+    cout << "Division: " << Math::divide(x, y) << endl;
+
+    // Example with division by zero
+    cout << "Division by Zero: " << Math::divide(x, 0) << endl;
+
+    return 0;
+}
+10. Write a class Student with a static data member to keep track of the total number of 
+students enrolled.
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Student {
+private:
+    string name;  // Student's name
+    int age;      // Student's age
+    static int totalStudents;  // Static data member to keep track of total students
+
+public:
+    // Constructor to initialize student's name and age, and increment the total student count
+    Student(string n, int a) {
+        name = n;
+        age = a;
+        totalStudents++;  // Increment total students whenever a new student is created
+    }
+
+    // Static function to get the total number of students
+    static int getTotalStudents() {
+        return totalStudents;
+    }
+
+    // Method to display student's details
+    void displayStudentDetails() const {
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+    }
+};
+
+// Initialize the static data member outside the class
+int Student::totalStudents = 0;
+
+int main() {
+    // Create Student objects
+    Student student1("John Doe", 20);
+    Student student2("Jane Smith", 22);
+    Student student3("Mike Brown", 21);
+
+    // Display the details of the students
+    student1.displayStudentDetails();
+    student2.displayStudentDetails();
+    student3.displayStudentDetails();
+
+    // Display the total number of students enrolled
+    cout << "Total number of students enrolled: " << Student::getTotalStudents() << endl;
+
+    return 0;
+}
+11.. Implement a class Book with a parameterized constructor to initialize book details.
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book {
+private:
+    string title;  // Book title
+    string author; // Book author
+    double price;  // Book price
+
+public:
+    // Parameterized constructor to initialize book details
+    Book(string t, string a, double p) {
+        title = t;
+        author = a;
+        price = p;
+    }
+
+    // Method to display book details
+    void displayBookDetails() const {
+        cout << "Book Title: " << title << endl;
+        cout << "Author: " << author << endl;
+        cout << "Price: $" << price << endl;
+    }
+};
+
+int main() {
+    // Creating a Book object with title, author, and price
+    Book book1("C++ Programming", "Bjarne Stroustrup", 45.99);
+
+    // Display the details of the book
+    book1.displayBookDetails();
+
+    return 0;
+}
+12. Create a class Point with a default constructor, parameterized constructor, and copy 
+constructor. 
+#include <iostream>
+using namespace std;
+
+class Point {
+private:
+    int x, y;
+
+public:
+    // Default constructor (sets point to (0, 0))
+    Point() {
+        x = 0;
+        y = 0;
+    }
+
+    // Parameterized constructor (sets point to given x and y)
+    Point(int x_val, int y_val) {
+        x = x_val;
+        y = y_val;
+    }
+
+    // Copy constructor (creates a copy of another Point object)
+    Point(const Point &p) {
+        x = p.x;
+        y = p.y;
+    }
+
+    // Method to display the point's coordinates
+    void displayPoint() const {
+        cout << "Point(" << x << ", " << y << ")" << endl;
+    }
+};
+
+int main() {
+    // Using the default constructor
+    Point p1;
+    p1.displayPoint(); // Expected: Point(0, 0)
+
+    // Using the parameterized constructor
+    Point p2(5, 10);
+    p2.displayPoint(); // Expected: Point(5, 10)
+
+    // Using the copy constructor
+    Point p3 = p2;
+    p3.displayPoint(); // Expected: Point(5, 10)
+
+    return 0;
+}
+13. Write a class Matrix with a parameterized constructor to initialize a 2D array. 
+#include <iostream>
+using namespace std;
+
+class Matrix {
+private:
+    int rows, cols; // Number of rows and columns
+    int** mat;      // 2D array (pointer to pointer)
+
+public:
+    // Parameterized constructor to initialize the matrix with given rows and columns
+    Matrix(int r, int c) {
+        rows = r;
+        cols = c;
+        
+        // Dynamically allocate memory for 2D array
+        mat = new int*[rows];
+        for (int i = 0; i < rows; ++i) {
+            mat[i] = new int[cols];
+        }
+    }
+
+    // Function to set the elements of the matrix
+    void setMatrixElements() {
+        cout << "Enter elements for a " << rows << "x" << cols << " matrix:" << endl;
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                cout << "Element [" << i + 1 << "][" << j + 1 << "]: ";
+                cin >> mat[i][j];
+            }
+        }
+    }
+
+    // Function to display the matrix
+    void displayMatrix() const {
+        cout << "Matrix (" << rows << "x" << cols << "):" << endl;
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                cout << mat[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    // Destructor to deallocate the dynamically allocated memory
+    ~Matrix() {
+        for (int i = 0; i < rows; ++i) {
+            delete[] mat[i]; // Free each row
+        }
+        delete[] mat; // Free the array of row pointers
+    }
+};
+
+int main() {
+    int rows, cols;
+
+    // Input for number of rows and columns
+    cout << "Enter number of rows: ";
+    cin >> rows;
+    cout << "Enter number of columns: ";
+    cin >> cols;
+
+    // Create a Matrix object with the user-defined size
+    Matrix m(rows, cols);
+
+    // Set the matrix elements
+    m.setMatrixElements();
+
+    // Display the matrix
+    m.displayMatrix();
+
+    return 0;
+}
+14.Implement a class FileHandler with a destructor that closes an open file. 
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+class FileHandler {
+private:
+    fstream file;  // fstream object to handle file operations
+
+public:
+    // Constructor that opens a file
+    FileHandler(const string &filename) {
+        file.open(filename, ios::in | ios::out | ios::app);  // Open file in read, write, and append mode
+        
+        if (!file) {
+            cerr << "Error opening file!" << endl;
+        } else {
+            cout << "File opened successfully." << endl;
+        }
+    }
+
+    // Function to write data to the file
+    void writeToFile(const string &data) {
+        if (file) {
+            file << data << endl;
+            cout << "Data written to file: " << data << endl;
+        } else {
+            cerr << "File is not open for writing." << endl;
+        }
+    }
+
+    // Function to read data from the file
+    void readFromFile() {
+        string line;
+        if (file) {
+            file.seekg(0);  // Move file pointer to the beginning
+            while (getline(file, line)) {
+                cout << line << endl;
+            }
+        } else {
+            cerr << "File is not open for reading." << endl;
+        }
+    }
+
+    // Destructor that closes the file
+    ~FileHandler() {
+        if (file.is_open()) {
+            file.close();  // Close the file
+            cout << "File closed successfully." << endl;
+        }
+    }
+};
+
+int main() {
+    // Create a FileHandler object which opens the file "example.txt"
+    FileHandler fileHandler("example.txt");
+
+    // Write data to the file
+    fileHandler.writeToFile("Hello, this is a test.");
+
+    // Read data from the file
+    cout << "Reading from the file:" << endl;
+    fileHandler.readFromFile();
+
+    // File will be automatically closed when fileHandler goes out of scope
+    return 0;
+}
+15. Create a class DynamicArray with a destructor that deallocates dynamically allocated 
+memory.
+#include <iostream>
+using namespace std;
+
+class DynamicArray {
+private:
+    int* arr;  // Pointer to dynamically allocated array
+    int size;  // Size of the array
+
+public:
+    // Constructor to initialize the array with a specified size
+    DynamicArray(int s) {
+        size = s;
+        arr = new int[size];  // Dynamically allocate memory for the array
+        cout << "Array of size " << size << " created." << endl;
+    }
+
+    // Function to set elements in the array
+    void setElements() {
+        cout << "Enter " << size << " elements:" << endl;
+        for (int i = 0; i < size; ++i) {
+            cout << "Element " << i + 1 << ": ";
+            cin >> arr[i];
+        }
+    }
+
+    // Function to display the elements of the array
+    void displayElements() const {
+        cout << "Array elements are: ";
+        for (int i = 0; i < size; ++i) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+
+    // Destructor to deallocate the dynamically allocated memory
+    ~DynamicArray() {
+        delete[] arr;  // Deallocate the memory
+        cout << "Memory deallocated and array destroyed." << endl;
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter the size of the array: ";
+    cin >> n;
+
+    // Create a DynamicArray object with the user-defined size
+    DynamicArray dynamicArr(n);
+
+    // Set elements of the array
+    dynamicArr.setElements();
+
+    // Display the elements of the array
+    dynamicArr.displayElements();
+
+    // The destructor will be called automatically when the object goes out of scope
+
+    return 0;
+}
+16.Write a class Logger with a destructor that logs messages when the object is destroyed.
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+class Logger {
+private:
+    ofstream logFile;  // Output file stream for logging messages
+
+public:
+    // Constructor to open the log file and log the creation of the object
+    Logger(const string& filename) {
+        logFile.open(filename, ios::app);  // Open the log file in append mode
+        
+        if (!logFile) {
+            cerr << "Error opening log file!" << endl;
+        } else {
+            logFile << "Logger object created." << endl;
+            cout << "Logger object created and log started." << endl;
+        }
+    }
+
+    // Method to log a custom message
+    void logMessage(const string& message) {
+        if (logFile) {
+            logFile << message << endl;
+            cout << "Log message: " << message << endl;
+        } else {
+            cerr << "Log file is not open!" << endl;
+        }
+    }
+
+    // Destructor to log a message when the object is destroyed
+    ~Logger() {
+        if (logFile) {
+            logFile << "Logger object destroyed." << endl;
+            logFile.close();  // Close the log file
+            cout << "Logger object destroyed and log file closed." << endl;
+        }
+    }
+};
+
+int main() {
+    // Create a Logger object with the log file name
+    Logger logger("logfile.txt");
+
+    // Log a custom message
+    logger.logMessage("This is a custom log message.");
+
+    // Logger will be destroyed automatically when it goes out of scope
+    return 0;
+}
+17.. Overload the "+" operator for a class Complex to add two complex numbers. 
+#include <iostream>
+using namespace std;
+
+class Complex {
+private:
+    float real, imag;  // Real and imaginary parts of the complex number
+
+public:
+    // Constructor to initialize the complex number
+    Complex(float r = 0.0, float i = 0.0) : real(r), imag(i) {}
+
+    // Overload the "+" operator to add two complex numbers
+    Complex operator+(const Complex& other) {
+        // Add corresponding real and imaginary parts
+        return Complex(real + other.real, imag + other.imag);
+    }
+
+    // Function to display the complex number
+    void display() const {
+        cout << real;
+        if (imag >= 0) {
+            cout << " + " << imag << "i" << endl;
+        } else {
+            cout << " - " << -imag << "i" << endl;
+        }
+    }
+};
+
+int main() {
+    // Create two complex numbers
+    Complex c1(3.5, 2.5);  // 3.5 + 2.5i
+    Complex c2(1.5, 4.5);  // 1.5 + 4.5i
+
+    // Display the complex numbers
+    cout << "Complex number 1: ";
+    c1.display();
+    cout << "Complex number 2: ";
+    c2.display();
+
+    // Add the complex numbers using overloaded "+" operator
+    Complex result = c1 + c2;
+
+    // Display the result
+    cout << "Sum of complex numbers: ";
+    result.display();
+
+    return 0;
+}
+18.#include <iostream>
+using namespace std;
+
+class Complex {
+private:
+    float real, imag;  // Real and imaginary parts of the complex number
+
+public:
+    // Constructor to initialize the complex number
+    Complex(float r = 0.0, float i = 0.0) : real(r), imag(i) {}
+
+    // Overload the "+" operator to add two complex numbers
+    Complex operator+(const Complex& other) {
+        // Add corresponding real and imaginary parts
+        return Complex(real + other.real, imag + other.imag);
+    }
+
+    // Function to display the complex number
+    void display() const {
+        cout << real;
+        if (imag >= 0) {
+            cout << " + " << imag << "i" << endl;
+        } else {
+            cout << " - " << -imag << "i" << endl;
+        }
+    }
+};
+
+int main() {
+    // Create two complex numbers
+    Complex c1(3.5, 2.5);  // 3.5 + 2.5i
+    Complex c2(1.5, 4.5);  // 1.5 + 4.5i
+
+    // Display the complex numbers
+    cout << "Complex number 1: ";
+    c1.display();
+    cout << "Complex number 2: ";
+    c2.display();
+
+    // Add the complex numbers using overloaded "+" operator
+    Complex result = c1 + c2;
+
+    // Display the result
+    cout << "Sum of complex numbers: ";
+    result.display();
+
+    return 0;
+}
+19.#include <iostream>
+using namespace std;
+
+class Complex {
+private:
+    float real, imag;  // Real and imaginary parts of the complex number
+
+public:
+    // Constructor to initialize the complex number
+    Complex(float r = 0.0, float i = 0.0) : real(r), imag(i) {}
+
+    // Overload the "+" operator to add two complex numbers
+    Complex operator+(const Complex& other) {
+        // Add corresponding real and imaginary parts
+        return Complex(real + other.real, imag + other.imag);
+    }
+
+    // Function to display the complex number
+    void display() const {
+        cout << real;
+        if (imag >= 0) {
+            cout << " + " << imag << "i" << endl;
+        } else {
+            cout << " - " << -imag << "i" << endl;
+        }
+    }
+};
+
+int main() {
+    // Create two complex numbers
+    Complex c1(3.5, 2.5);  // 3.5 + 2.5i
+    Complex c2(1.5, 4.5);  // 1.5 + 4.5i
+
+    // Display the complex numbers
+    cout << "Complex number 1: ";
+    c1.display();
+    cout << "Complex number 2: ";
+    c2.display();
+
+    // Add the complex numbers using overloaded "+" operator
+    Complex result = c1 + c2;
+
+    // Display the result
+    cout << "Sum of complex numbers: ";
+    result.display();
+
+    return 0;
+}
+19.#include <iostream>
+using namespace std;
+
+class Complex {
+private:
+    float real, imag;  // Real and imaginary parts of the complex number
+
+public:
+    // Constructor to initialize the complex number
+    Complex(float r = 0.0, float i = 0.0) : real(r), imag(i) {}
+
+    // Overload the "+" operator to add two complex numbers
+    Complex operator+(const Complex& other) {
+        // Add corresponding real and imaginary parts
+        return Complex(real + other.real, imag + other.imag);
+    }
+
+    // Function to display the complex number
+    void display() const {
+        cout << real;
+        if (imag >= 0) {
+            cout << " + " << imag << "i" << endl;
+        } else {
+            cout << " - " << -imag << "i" << endl;
+        }
+    }
+};
+
+int main() {
+    // Create two complex numbers
+    Complex c1(3.5, 2.5);  // 3.5 + 2.5i
+    Complex c2(1.5, 4.5);  // 1.5 + 4.5i
+
+    // Display the complex numbers
+    cout << "Complex number 1: ";
+    c1.display();
+    cout << "Complex number 2: ";
+    c2.display();
+
+    // Add the complex numbers using overloaded "+" operator
+    Complex result = c1 + c2;
+
+    // Display the result
+    cout << "Sum of complex numbers: ";
+    result.display();
+
+    return 0;
+}
+19. Implement the "<<" and ">>" operators for a class Fraction to input and output fraction 
+values. 
+#include <iostream>
+using namespace std;
+
+class Fraction {
+private:
+    int numerator, denominator;
+
+public:
+    // Constructor to initialize the fraction
+    Fraction(int num = 0, int denom = 1) : numerator(num), denominator(denom) {
+        if (denominator == 0) {  // Denominator cannot be zero
+            throw invalid_argument("Denominator cannot be zero");
+        }
+    }
+
+    // Overload the "<<" operator for output
+    friend ostream& operator<<(ostream& out, const Fraction& frac) {
+        out << frac.numerator << "/" << frac.denominator;
+        return out;
+    }
+
+    // Overload the ">>" operator for input
+    friend istream& operator>>(istream& in, Fraction& frac) {
+        char slash;  // To read the '/' character
+        in >> frac.numerator >> slash >> frac.denominator;
+        if (frac.denominator == 0) {  // Denominator cannot be zero
+            throw invalid_argument("Denominator cannot be zero");
+        }
+        return in;
+    }
+
+    // Method to display the fraction (optional, if needed)
+    void display() const {
+        cout << numerator << "/" << denominator << endl;
+    }
+};
+
+int main() {
+    try {
+        Fraction frac1, frac2;
+
+        // Take input for two fractions
+        cout << "Enter the first fraction (format: numerator/denominator): ";
+        cin >> frac1;
+
+        cout << "Enter the second fraction (format: numerator/denominator): ";
+        cin >> frac2;
+
+        // Output the fractions using the overloaded "<<"
+        cout << "First Fraction: " << frac1 << endl;
+        cout << "Second Fraction: " << frac2 << endl;
+
+    } catch (const invalid_argument& e) {
+        cout << "Error: " << e.what() << endl;
+    }
+
+    return 0;
+}
+20.Overload the "==" operator for a class Date to compare two dates.
+#include <iostream>
+using namespace std;
+
+class Date {
+private:
+    int day, month, year;
+
+public:
+    // Constructor
+    Date(int d = 1, int m = 1, int y = 2000) : day(d), month(m), year(y) {}
+
+    // Overload "==" operator to compare two Date objects
+    bool operator==(const Date& other) const {
+        return (day == other.day && month == other.month && year == other.year);
+    }
+
+    // Display method
+    void display() const {
+        cout << day << "/" << month << "/" << year << endl;
+    }
+};
+
+int main() {
+    Date date1(8, 5, 2025);
+    Date date2(8, 5, 2025);
+    Date date3(9, 5, 2025);
+
+    // Compare date1 and date2
+    if (date1 == date2) {
+        cout << "date1 and date2 are equal." << endl;
+    } else {
+        cout << "date1 and date2 are not equal." << endl;
+    }
+
+    // Compare date1 and date3
+    if (date1 == date3) {
+        cout << "date1 and date3 are equal." << endl;
+    } else {
+        cout << "date1 and date3 are not equal." << endl;
+    }
+
+    return 0;
+}
+21. Write a class Vector and overload the "[]" operator to access elements of the vector.
+#include <iostream>
+#include <stdexcept>  // For std::out_of_range
+using namespace std;
+
+class Vector {
+private:
+    int* arr;      // Pointer to dynamically allocated array
+    int size;      // Number of elements
+
+public:
+    // Constructor
+    Vector(int s) : size(s) {
+        arr = new int[size];
+        for (int i = 0; i < size; ++i)
+            arr[i] = 0;  // Initialize all elements to 0
+    }
+
+    // Overload [] operator (non-const version)
+    int& operator[](int index) {
+        if (index < 0 || index >= size)
+            throw out_of_range("Index out of bounds");
+        return arr[index];
+    }
+
+    // Overload [] operator (const version for read-only objects)
+    int operator[](int index) const {
+        if (index < 0 || index >= size)
+            throw out_of_range("Index out of bounds");
+        return arr[index];
+    }
+
+    // Method to get the size of the vector
+    int getSize() const {
+        return size;
+    }
+
+    // Destructor
+    ~Vector() {
+        delete[] arr;
+    }
+};
+
+int main() {
+    Vector v(5);  // Create a Vector of size 5
+
+    // Set values using [] operator
+    for (int i = 0; i < v.getSize(); ++i)
+        v[i] = i * 10;
+
+    // Display values using [] operator
+    cout << "Vector elements: ";
+    for (int i = 0; i < v.getSize(); ++i)
+        cout << v[i] << " ";
+    cout << endl;
+
+    // Uncommenting the next line will throw an exception:
+    // cout << v[10];
+
+    return 0;
+}
+22.Implement a class Box with a friend function to calculate the volume of two boxes.
+#include <iostream>
+using namespace std;
+
+class Box {
+private:
+    double length, width, height;
+
+public:
+    // Constructor to initialize box dimensions
+    Box(double l = 1, double w = 1, double h = 1) : length(l), width(w), height(h) {}
+
+    // Friend function declaration
+    friend double totalVolume(const Box& b1, const Box& b2);
+};
+
+// Friend function definition
+double totalVolume(const Box& b1, const Box& b2) {
+    double volume1 = b1.length * b1.width * b1.height;
+    double volume2 = b2.length * b2.width * b2.height;
+    return volume1 + volume2;
+}
+
+int main() {
+    Box box1(2.5, 3.0, 4.0);  // Volume = 30
+    Box box2(1.0, 2.0, 3.0);  // Volume = 6
+
+    double total = totalVolume(box1, box2);
+
+    cout << "Total volume of box1 and box2 is: " << total << endl;
+
+    return 0;
+}
+23. Create a class Circle with a friend function to calculate the area. 
+#include <iostream>
+#include <cmath>  // For M_PI (or use your own PI)
+using namespace std;
+
+class Circle {
+private:
+    double radius;
+
+public:
+    // Constructor to initialize radius
+    Circle(double r = 0.0) : radius(r) {}
+
+    // Friend function declaration
+    friend double calculateArea(const Circle& c);
+};
+
+// Friend function definition
+double calculateArea(const Circle& c) {
+    return M_PI * c.radius * c.radius;  // Area = πr²
+}
+
+int main() {
+    Circle c1(5.0);  // Radius = 5
+
+    double area = calculateArea(c1);
+
+    cout << "Area of the circle: " << area << endl;
+
+    return 0;
+}
+24. Write a class Distance with a friend function to add two distances. 
+#include <iostream>
+using namespace std;
+
+class Distance {
+private:
+    int feet;
+    int inches;
+
+public:
+    // Constructor
+    Distance(int f = 0, int i = 0) : feet(f), inches(i) {
+        normalize();  // Convert extra inches to feet
+    }
+
+    // Normalize inches to be less than 12
+    void normalize() {
+        if (inches >= 12) {
+            feet += inches / 12;
+            inches %= 12;
+        }
+    }
+
+    // Friend function to add two Distance objects
+    friend Distance addDistances(const Distance& d1, const Distance& d2);
+
+    // Function to display the distance
+    void display() const {
+        cout << feet << " feet " << inches << " inches" << endl;
+    }
+};
+
+// Friend function definition
+Distance addDistances(const Distance& d1, const Distance& d2) {
+    int totalFeet = d1.feet + d2.feet;
+    int totalInches = d1.inches + d2.inches;
+
+    Distance result(totalFeet, totalInches);  // Constructor will normalize
+
+    return result;
+}
+
+int main() {
+    Distance d1(5, 8);  // 5 feet 8 inches
+    Distance d2(3, 11); // 3 feet 11 inches
+
+    Distance sum = addDistances(d1, d2);
+
+    cout << "Distance 1: ";
+    d1.display();
+
+    cout << "Distance 2: ";
+    d2.display();
+
+    cout << "Total Distance: ";
+    sum.display();
+
+    return 0;
+}
+25.. Implement a class Shape with derived classes Circle, Rectangle, and Triangle.
+Shape Class Hierarchy
+
+
+#include <iostream>
+#include <cmath>
+
+// Base class: Shape
+class Shape {
+public:
+    virtual void calculateArea() = 0;
+    virtual void calculatePerimeter() = 0;
+    virtual void displayDetails() = 0;
+
+    virtual ~Shape() {}
+};
+
+// Derived class: Circle
+class Circle : public Shape {
+private:
+    double radius;
+
+public:
+    Circle(double r) : radius(r) {}
+
+    void calculateArea() override {
+        area = 3.14159 * radius * radius;
+    }
+
+    void calculatePerimeter() override {
+        perimeter = 2 * 3.14159 * radius;
+    }
+
+    void displayDetails() override {
+        calculateArea();
+        calculatePerimeter();
+        std::cout << "Circle Details:" << std::endl;
+        std::cout << "Radius: " << radius << std::endl;
+        std::cout << "Area: " << area << std::endl;
+        std::cout << "Circumference: " << perimeter << std::endl;
+    }
+
+private:
+    double area;
+    double perimeter;
+};
+
+// Derived class: Rectangle
+class Rectangle : public Shape {
+private:
+    double length;
+    double width;
+
+public:
+    Rectangle(double l, double w) : length(l), width(w) {}
+
+    void calculateArea() override {
+        area = length * width;
+    }
+
+    void calculatePerimeter() override {
+        perimeter = 2 * (length + width);
+    }
+
+    void displayDetails() override {
+        calculateArea();
+        calculatePerimeter();
+        std::cout << "Rectangle Details:" << std::endl;
+        std::cout << "Length: " << length << std::endl;
+        std::cout << "Width: " << width << std::endl;
+        std::cout << "Area: " << area << std::endl;
+        std::cout << "Perimeter: " << perimeter << std::endl;
+    }
+
+private:
+    double area;
+    double perimeter;
+};
+
+// Derived class: Triangle
+class Triangle : public Shape {
+private:
+    double side1;
+    double side2;
+    double side3;
+
+public:
+    Triangle(double s1, double s2, double s3) : side1(s1), side2(s2), side3(s3) {}
+
+    void calculateArea() override {
+        // Using Heron's formula
+        double s = (side1 + side2 + side3) / 2;
+        area = sqrt(s * (s - side1) * (s - side2) * (s - side3));
+    }
+
+    void calculatePerimeter() override {
+        perimeter = side1 + side2 + side3;
+    }
+
+    void displayDetails() override {
+        calculateArea();
+        calculatePerimeter();
+        std::cout << "Triangle Details:" << std::endl;
+        std::cout << "Side 1: " << side1 << std::endl;
+        std::cout << "Side 2: " << side2 << std::endl;
+        std::cout << "Side 3: " << side3 << std::endl;
+        std::cout << "Area: " << area << std::endl;
+        std::cout << "Perimeter: " << perimeter << std::endl;
+    }
+
+private:
+    double area;
+    double perimeter;
+};
+
+int main() {
+    Circle circle(5.0);
+    circle.displayDetails();
+
+    Rectangle rectangle(4.0, 6.0);
+    rectangle.displayDetails();
+
+    Triangle triangle(3.0, 4.0, 5.0);
+    triangle.displayDetails();
+
+    return 0;
+}
+26. Write a class Vehicle with derived classes Car and Bike.
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class: Vehicle
+class Vehicle {
+protected:
+    string brand;
+    int price;
+
+public:
+    Vehicle(string b = "", int p = 0) : brand(b), price(p) {}
+
+    virtual void display() const {
+        cout << "Brand: " << brand << "\nPrice: " << price << endl;
+    }
+
+    virtual ~Vehicle() {}
+};
+
+// Derived class: Car
+class Car : public Vehicle {
+private:
+    int doors;
+    string fuelType;
+
+public:
+    Car(string b, int p, int d, string f)
+        : Vehicle(b, p), doors(d), fuelType(f) {}
+
+    void display() const override {
+        Vehicle::display();
+        cout << "Doors: " << doors << "\nFuel Type: " << fuelType << endl;
+    }
+};
+
+// Derived class: Bike
+class Bike : public Vehicle {
+private:
+    string type;
+    bool hasCarrier;
+
+public:
+    Bike(string b, int p, string t, bool h)
+        : Vehicle(b, p), type(t), hasCarrier(h) {}
+
+    void display() const override {
+        Vehicle::display();
+        cout << "Type: " << type << "\nHas Carrier: " << (hasCarrier ? "Yes" : "No") << endl;
+    }
+};
+
+int main() {
+    Vehicle v("Generic Vehicle", 10000);
+    Car c("Toyota", 20000, 4, "Petrol");
+    Bike b("Yamaha", 15000, "Sport", true);
+
+    cout << "Vehicle Info:\n";
+    v.display();
+
+    cout << "\nCar Info:\n";
+    c.display();
+
+    cout << "\nBike Info:\n";
+    b.display();
+
+    return 0;
+}
+27.Implement single inheritance with a base class Person and derived class Employee. 
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class: Person
+class Person {
+protected:
+    string name;
+    int age;
+
+public:
+    // Constructor
+    Person(string n = "", int a = 0) : name(n), age(a) {}
+
+    // Method to display personal information
+    void displayInfo() const {
+        cout << "Name: " << name << "\nAge: " << age << endl;
+    }
+};
+
+// Derived class: Employee
+class Employee : public Person {
+private:
+    int employeeID;
+    double salary;
+
+public:
+    // Constructor
+    Employee(string n, int a, int id, double s)
+        : Person(n, a), employeeID(id), salary(s) {}
+
+    // Method to display employee details
+    void displayEmployeeDetails() const {
+        displayInfo(); // Call base class method
+        cout << "Employee ID: " << employeeID << "\nSalary: $" << salary << endl;
+    }
+};
+
+int main() {
+    Employee emp("Alice Johnson", 30, 101, 55000.0);
+    emp.displayEmployeeDetails();
+
+    return 0;
+}
+28.Create a class Parent and implement multiple inheritance with derived classes Child1 
+and Child2.
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class: Parent
+class Parent {
+protected:
+    string name;
+
+public:
+    Parent(string n = "") : name(n) {}
+
+    void displayName() const {
+        cout << "Name: " << name << endl;
+    }
+};
+
+// Derived class: Child1
+class Child1 : public Parent {
+protected:
+    int age;
+
+public:
+    Child1(string n, int a) : Parent(n), age(a) {}
+
+    void displayAge() const {
+        cout << "Age: " << age << endl;
+    }
+};
+
+// Derived class: Child2
+class Child2 : public Parent {
+protected:
+    string occupation;
+
+public:
+    Child2(string n, string o) : Parent(n), occupation(o) {}
+
+    void displayOccupation() const {
+        cout << "Occupation: " << occupation << endl;
+    }
+};
+
+// Derived class: Grandchild
+class Grandchild : public Child1, public Child2 {
+public:
+    Grandchild(string n, int a, string o)
+        : Parent(n), Child1(n, a), Child2(n, o) {}
+
+    void displayAll() const {
+        displayName();
+        displayAge();
+        displayOccupation();
+    }
+};
+
+int main() {
+    Grandchild gc("Alex", 25, "Engineer");
+    gc.displayAll();
+
+    return 0;
+}
+28. Write a class Base and implement hierarchical inheritance with derived classes Derived1, 
+Derived2, and Derived3.
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class
+class Base {
+protected:
+    string name;
+
+public:
+    Base(string n = "") : name(n) {}
+
+    void displayName() const {
+        cout << "Name: " << name << endl;
+    }
+};
+
+// Derived class 1
+class Derived1 : public Base {
+protected:
+    int age;
+
+public:
+    Derived1(string n, int a) : Base(n), age(a) {}
+
+    void displayAge() const {
+        cout << "Age: " << age << endl;
+    }
+};
+
+// Derived class 2
+class Derived2 : public Base {
+protected:
+    string occupation;
+
+public:
+    Derived2(string n, string o) : Base(n), occupation(o) {}
+
+    void displayOccupation() const {
+        cout << "Occupation: " << occupation << endl;
+    }
+};
+
+// Derived class 3
+class Derived3 : public Derived1, public Derived2 {
+public:
+    Derived3(string n, int a, string o)
+        : Base(n), Derived1(n, a), Derived2(n, o) {}
+
+    void displayAll() const {
+        displayName();
+        displayAge();
+        displayOccupation();
+    }
+};
+
+int main() {
+    Derived3 obj("John Doe", 30, "Software Engineer");
+    obj.displayAll();
+
+    return 0;
+}
+29. Implement multilevel inheritance with classes Base, Intermediate, and Derived.
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class
+class Base {
+protected:
+    string name;
+
+public:
+    Base(string n = "") : name(n) {}
+
+    void displayName() const {
+        cout << "Name: " << name << endl;
+    }
+};
+
+// Intermediate class
+class Intermediate : public Base {
+protected:
+    int age;
+
+public:
+    Intermediate(string n, int a) : Base(n), age(a) {}
+
+    void displayAge() const {
+        cout << "Age: " << age << endl;
+    }
+};
+
+// Derived class
+class Derived : public Intermediate {
+private:
+    string occupation;
+
+public:
+    Derived(string n, int a, string o) : Intermediate(n, a), occupation(o) {}
+
+    void displayOccupation() const {
+        cout << "Occupation: " << occupation << endl;
+    }
+
+    void displayAll() const {
+        displayName();
+        displayAge();
+        displayOccupation();
+    }
+};
+
+int main() {
+    Derived obj("Alice", 30, "Engineer");
+    obj.displayAll();
+
+    return 0;
+}
+30.Create a class Base and implement hybrid inheritance with derived classes Derived1, 
+Derived2, and Derived3.
+#include <iostream>
+
+// Base class
+class Base {
+public:
+    void displayBase() {
+        std::cout << "Base class" << std::endl;
+    }
+};
+
+// Derived class 1 (inheriting from Base)
+class Derived1 : public Base {
+public:
+    void displayDerived1() {
+        std::cout << "Derived 1 class" << std::endl;
+    }
+};
+
+// Derived class 2 (inheriting from Base)
+class Derived2 : public Base {
+public:
+    void displayDerived2() {
+        std::cout << "Derived 2 class" << std::endl;
+    }
+};
+
+// Derived class 3 (inheriting from Derived1 and Derived2)
+class Derived3 : public Derived1, public Derived2 {
+public:
+    void displayDerived3() {
+        std::cout << "Derived 3 class" << std::endl;
+    }
+};
+
+int main() {
+    Derived3 obj;
+    obj.displayBase();      // Accessing Base class function
+    obj.displayDerived1();  // Accessing Derived1 class function
+    obj.displayDerived2();  // Accessing Derived2 class function
+    obj.displayDerived3();  // Accessing Derived3 class function
+
+    return 0;
+}
+
+31. Implement a class Library with private, protected, and public members and demonstrate 
+their accessibility.
+Library Class with Private, Protected, and Public Members
+
+
+#include <iostream>
+#include <string>
+
+class Library {
+private:
+    std::string libraryName;
+
+    void displayPrivate() {
+        std::cout << "Private member function" << std::endl;
+    }
+
+protected:
+    std::string location;
+
+    void displayProtected() {
+        std::cout << "Protected member function" << std::endl;
+    }
+
+public:
+    Library(std::string name, std::string loc) : libraryName(name), location(loc) {}
+
+    void displayPublic() {
+        std::cout << "Public member function" << std::endl;
+        displayPrivate();  // Accessing private member function within the class
+        displayProtected(); // Accessing protected member function within the class
+    }
+
+    void displayLibraryInfo() {
+        std::cout << "Library Name: " << libraryName << std::endl;
+        std::cout << "Location: " << location << std::endl;
+    }
+};
+
+class DerivedLibrary : public Library {
+public:
+    DerivedLibrary(std::string name, std::string loc) : Library(name, loc) {}
+
+    void displayDerivedInfo() {
+        // location is accessible as it's protected
+        std::cout << "Derived Library Location: " << location << std::endl;
+        displayProtected(); // Protected member function is accessible
+        // libraryName is not accessible as it's private
+        // displayPrivate(); // Error: Private member function is not accessible
+    }
+};
+
+int main() {
+    Library lib("Central Library", "Downtown");
+    // lib.displayPrivate(); // Error: Private member function is not accessible
+    // lib.displayProtected(); // Error: Protected member function is not accessible
+    lib.displayPublic(); // Public member function is accessible
+    lib.displayLibraryInfo(); // Public member function is accessible
+
+    DerivedLibrary derivedLib("University Library", "Campus");
+    derivedLib.displayDerivedInfo();
+    derivedLib.displayPublic(); // Public member function is accessible
+    derivedLib.displayLibraryInfo(); // Public member function is accessible
+
+    return 0;
+}
+32. Create a class Account with private data members and public methods to access and 
+modify them.
+Account Class with Private Data Members and Public Methods
+
+
+#include <iostream>
+#include <string>
+
+class Account {
+private:
+    std::string accountHolderName;
+    int accountNumber;
+    double balance;
+
+public:
+    // Constructor
+    Account(std::string name, int accNum, double initialBalance) 
+        : accountHolderName(name), accountNumber(accNum), balance(initialBalance) {}
+
+    // Getter methods
+    std::string getAccountHolderName() const {
+        return accountHolderName;
+    }
+
+    int getAccountNumber() const {
+        return accountNumber;
+    }
+
+    double getBalance() const {
+        return balance;
+    }
+
+    // Setter methods
+    void setAccountHolderName(const std::string& name) {
+        accountHolderName = name;
+    }
+
+    // Method to deposit money
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            std::cout << "Deposited: " << amount << std::endl;
+        } else {
+            std::cout << "Invalid deposit amount." << std::endl;
+        }
+    }
+
+    // Method to withdraw money
+    void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            std::cout << "Withdrawn: " << amount << std::endl;
+        } else {
+            std::cout << "Insufficient balance or invalid withdrawal amount." << std::endl;
+        }
+    }
+
+    // Method to display account information
+    void displayAccountInfo() const {
+        std::cout << "Account Holder Name: " << accountHolderName << std::endl;
+        std::cout << "Account Number: " << accountNumber << std::endl;
+        std::cout << "Balance: " << balance << std::endl;
+    }
+};
+
+int main() {
+    Account account("John Doe", 12345, 1000.0);
+    account.displayAccountInfo();
+
+    account.deposit(500.0);
+    account.withdraw(200.0);
+    account.displayAccountInfo();
+
+    account.setAccountHolderName("Jane Doe");
+    account.displayAccountInfo();
+
+    return 0;
+}
+33.Function Overriding with Shape and Circle Classes
+
+
+#include <iostream>
+
+// Base class: Shape
+class Shape {
+public:
+    virtual void draw() {
+        std::cout << "Drawing a shape." << std::endl;
+    }
+
+    virtual void calculateArea() {
+        std::cout << "Calculating shape area." << std::endl;
+    }
+};
+
+// Derived class: Circle
+class Circle : public Shape {
+private:
+    double radius;
+
+public:
+    Circle(double r) : radius(r) {}
+
+    void draw() override {
+        std::cout << "Drawing a circle with radius " << radius << std::endl;
+    }
+
+    void calculateArea() override {
+        double area = 3.14159 * radius * radius;
+        std::cout << "Circle area: " << area << std::endl;
+    }
+};
+
+int main() {
+    Shape shape;
+    shape.draw();
+    shape.calculateArea();
+
+    Circle circle(5.0);
+    circle.draw();
+    circle.calculateArea();
+
+    // Using polymorphism
+    Shape* shapePtr = &circle;
+    shapePtr->draw();
+    shapePtr->calculateArea();
+
+    return 0;
+}
+34. Create a base class Employee and derived class Manager with overridden methods.
+Employee and Manager Classes with Overridden Methods
+
+
+#include <iostream>
+#include <string>
+
+// Base class: Employee
+class Employee {
+public:
+    Employee(std::string name, double salary) : name(name), salary(salary) {}
+
+    virtual void displayInfo() {
+        std::cout << "Name: " << name << std::endl;
+        std::cout << "Salary: " << salary << std::endl;
+    }
+
+    virtual void calculateBonus() {
+        double bonus = salary * 0.1;
+        std::cout << "Bonus: " << bonus << std::endl;
+    }
+
+protected:
+    std::string name;
+    double salary;
+};
+
+// Derived class: Manager
+class Manager : public Employee {
+public:
+    Manager(std::string name, double salary, std::string department) 
+        : Employee(name, salary), department(department) {}
+
+    void displayInfo() override {
+        Employee::displayInfo();
+        std::cout << "Department: " << department << std::endl;
+    }
+
+    void calculateBonus() override {
+        double bonus = salary * 0.2; // Managers get a higher bonus percentage
+        std::cout << "Bonus: " << bonus << std::endl;
+    }
+
+private:
+    std::string department;
+};
+
+int main() {
+    Employee employee("John Doe", 50000.0);
+    employee.displayInfo();
+    employee.calculateBonus();
+
+    Manager manager("Jane Smith", 80000.0, "Marketing");
+    manager.displayInfo();
+    manager.calculateBonus();
+
+    // Using polymorphism
+    Employee* employeePtr = &manager;
+    employeePtr->displayInfo();
+    employeePtr->calculateBonus();
+
+    return 0;
+}
+35. Implement a virtual base class Entity with derived classes Person and Organization.
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Virtual base class
+class Entity {
+protected:
+    string id;
+
+public:
+    Entity(const string& identifier) : id(identifier) {}
+    virtual void display() const {
+        cout << "Entity ID: " << id << endl;
+    }
+    virtual ~Entity() {}
+};
+
+// Derived class Person
+class Person : virtual public Entity {
+protected:
+    string name;
+
+public:
+    Person(const string& identifier, const string& personName)
+        : Entity(identifier), name(personName) {}
+
+    void display() const override {
+        Entity::display();
+        cout << "Name: " << name << endl;
+    }
+};
+
+// Derived class Organization
+class Organization : virtual public Entity {
+protected:
+    string orgName;
+
+public:
+    Organization(const string& identifier, const string& organizationName)
+        : Entity(identifier), orgName(organizationName) {}
+
+    void display() const override {
+        Entity::display();
+        cout << "Organization: " << orgName << endl;
+    }
+};
+
+// Derived class Employee
+class Employee : public Person, public Organization {
+private:
+    string position;
+
+public:
+    Employee(const string& identifier, const string& personName, const string& organizationName, const string& jobPosition)
+        : Entity(identifier), Person(identifier, personName), Organization(identifier, organizationName), position(jobPosition) {}
+
+    void display() const override {
+        Person::display();
+        Organization::display();
+        cout << "Position: " << position << endl;
+    }
+};
+
+int main() {
+    Employee emp("E001", "Alice Johnson", "TechCorp", "Software Engineer");
+    emp.display();
+
+    return 0;
+}
+36. Write a class Animal and implement a virtual base class to avoid the diamond problem in 
+inheritance.
+Animal Class Hierarchy with Virtual Base Class
+
+
+#include <iostream>
+#include <string>
+
+// Base class: Animal
+class Animal {
+public:
+    Animal(std::string name) : name(name) {}
+
+    void eat() {
+        std::cout << name << " is eating." << std::endl;
+    }
+
+protected:
+    std::string name;
+};
+
+// Virtual base class: Mammal
+class Mammal : virtual public Animal {
+public:
+    Mammal(std::string name) : Animal(name) {}
+
+    void walk() {
+        std::cout << name << " is walking." << std::endl;
+    }
+};
+
+// Virtual base class: Carnivore
+class Carnivore : virtual public Animal {
+public:
+    Carnivore(std::string name) : Animal(name) {}
+
+    void hunt() {
+        std::cout << name << " is hunting." << std::endl;
+    }
+};
+
+// Derived class: Lion
+class Lion : public Mammal, public Carnivore {
+public:
+    Lion(std::string name) : Animal(name), Mammal(name), Carnivore(name) {}
+
+    void roar() {
+        std::cout << name << " is roaring." << std::endl;
+    }
+};
+
+int main() {
+    Lion lion("Simba");
+    lion.eat();   // No ambiguity
+    lion.walk();  // No ambiguity
+    lion.hunt();  // No ambiguity
+    lion.roar();
+
+    return 0;
+}
+
+36.Create a class Game with member functions to simulate a simple game with player 
+actions and scoring.
+Game Class with Member Functions
+
+
+#include <iostream>
+#include <string>
+
+class Game {
+private:
+    std::string playerName;
+    int score;
+    int lives;
+
+public:
+    // Constructor
+    Game(std::string name) : playerName(name), score(0), lives(3) {}
+
+    // Member function to display player info
+    void displayInfo() {
+        std::cout << "Player Name: " << playerName << std::endl;
+        std::cout << "Score: " << score << std::endl;
+        std::cout << "Lives: " << lives << std::endl;
+    }
+
+    // Member function to simulate player action
+    void play() {
+        std::cout << playerName << " is playing..." << std::endl;
+        score += 10; // Increase score for playing
+        std::cout << "Score increased by 10." << std::endl;
+    }
+
+    // Member function to simulate player losing a life
+    void loseLife() {
+        if (lives > 0) {
+            lives--;
+            std::cout << playerName << " lost a life." << std::endl;
+        } else {
+            std::cout << playerName << " has no lives left." << std::endl;
+        }
+    }
+
+    // Member function to simulate player gaining a life
+    void gainLife() {
+        lives++;
+        std::cout << playerName << " gained a life." << std::endl;
+    }
+
+    // Member function to check game over
+    bool isGameOver() {
+        return lives <= 0;
+    }
+};
+
+int main() {
+    Game game("John");
+    game.displayInfo();
+
+    while (!game.isGameOver()) {
+        game.play();
+        game.displayInfo();
+
+        // Simulate losing a life randomly
+        if (rand() % 2 == 0) {
+            game.loseLife();
+            game.displayInfo();
+        }
+
+        // Simulate gaining a life randomly
+        if (rand() % 3 == 0) {
+            game.gainLife();
+            game.displayInfo();
+        }
+    }
+
+    std::cout << "Game Over!" << std::endl;
+
+    return 0;
+}
+37.Implement a class Polynomial with member functions to add and multiply polynomials.
+Polynomial Class with Member Functions
+
+
+#include <iostream>
+#include <vector>
+
+class Polynomial {
+private:
+    std::vector<double> coefficients;
+
+public:
+    // Constructor
+    Polynomial(const std::vector<double>& coeffs) : coefficients(coeffs) {}
+
+    // Member function to display polynomial
+    void display() const {
+        for (int i = coefficients.size() - 1; i >= 0; --i) {
+            if (coefficients[i] != 0) {
+                if (i != coefficients.size() - 1 && coefficients[i] > 0) {
+                    std::cout << " + ";
+                }
+                if (coefficients[i] != 1 || i == 0) {
+                    std::cout << coefficients[i];
+                }
+                if (i > 0) {
+                    std::cout << "x";
+                    if (i > 1) {
+                        std::cout << "^" << i;
+                    }
+                }
+            }
+        }
+        std::cout << std::endl;
+    }
+
+    // Member function to add polynomials
+    Polynomial add(const Polynomial& other) const {
+        std::vector<double> resultCoefficients;
+        int maxDegree = std::max(coefficients.size(), other.coefficients.size());
+
+        for (int i = 0; i < maxDegree; ++i) {
+            double coeff = (i < coefficients.size() ? coefficients[i] : 0) +
+                           (i < other.coefficients.size() ? other.coefficients[i] : 0);
+            resultCoefficients.push_back(coeff);
+        }
+
+        return Polynomial(resultCoefficients);
+    }
+
+    // Member function to multiply polynomials
+    Polynomial multiply(const Polynomial& other) const {
+        std::vector<double> resultCoefficients(coefficients.size() + other.coefficients.size() - 1, 0);
+
+        for (int i = 0; i < coefficients.size(); ++i) {
+            for (int j = 0; j < other.coefficients.size(); ++j) {
+                resultCoefficients[i + j] += coefficients[i] * other.coefficients[j];
+            }
+        }
+
+        return Polynomial(resultCoefficients);
+    }
+};
+
+int main() {
+    Polynomial p1({1, 2, 3}); // 3x^2 + 2x + 1
+    Polynomial p2({4, 5});    // 5x + 4
+
+    std::cout << "Polynomial 1: ";
+    p1.display();
+
+    std::cout << "Polynomial 2: ";
+    p2.display();
+
+    Polynomial sum = p1.add(p2);
+    std::cout << "Sum: ";
+    sum.display();
+
+    Polynomial product = p1.multiply(p2);
+    std::cout << "Product: ";
+    product.display();
+
+    return 0;
+}
+38. Create a class SparseMatrix with member functions for matrix addition and 
+multiplication.
+SparseMatrix Class with Member Functions
+
+
+#include <iostream>
+#include <map>
+
+class SparseMatrix {
+private:
+    int rows;
+    int cols;
+    std::map<std::pair<int, int>, double> elements;
+
+public:
+    // Constructor
+    SparseMatrix(int r, int c) : rows(r), cols(c) {}
+
+    // Member function to insert an element
+    void insert(int row, int col, double value) {
+        if (row >= 0 && row < rows && col >= 0 && col < cols) {
+            elements[{row, col}] = value;
+        }
+    }
+
+    // Member function to display the matrix
+    void display() const {
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                auto it = elements.find({i, j});
+                if (it != elements.end()) {
+                    std::cout << it->second << " ";
+                } else {
+                    std::cout << "0 ";
+                }
+            }
+            std::cout << std::endl;
+        }
+    }
+
+    // Member function to add two sparse matrices
+    SparseMatrix add(const SparseMatrix& other) const {
+        if (rows != other.rows || cols != other.cols) {
+            std::cerr << "Matrix dimensions do not match for addition." << std::endl;
+            exit(1);
+        }
+
+        SparseMatrix result(rows, cols);
+        for (const auto& element : elements) {
+            result.insert(element.first.first, element.first.second, element.second);
+        }
+
+        for (const auto& element : other.elements) {
+            double value = result.getElement(element.first.first, element.first.second) + element.second;
+            result.insert(element.first.first, element.first.second, value);
+        }
+
+        return result;
+    }
+
+    // Member function to multiply two sparse matrices
+    SparseMatrix multiply(const SparseMatrix& other) const {
+        if (cols != other.rows) {
+            std::cerr << "Matrix dimensions do not match for multiplication." << std::endl;
+            exit(1);
+        }
+
+        SparseMatrix result(rows, other.cols);
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < other.cols; ++j) {
+                double sum = 0;
+                for (int k = 0; k < cols; ++k) {
+                    sum += getElement(i, k) * other.getElement(k, j);
+                }
+                if (sum != 0) {
+                    result.insert(i, j, sum);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    // Helper function to get an element
+    double getElement(int row, int col) const {
+        auto it = elements.find({row, col});
+        return (it != elements.end()) ? it->second : 0;
+    }
+};
+
+int main() {
+    SparseMatrix matrix1(2, 2);
+    matrix1.insert(0, 0, 1);
+    matrix1.insert(1, 1, 2);
+
+    SparseMatrix matrix2(2, 2);
+    matrix2.insert(0, 0, 3);
+    matrix2.insert(1, 1, 4);
+
+    std::cout << "Matrix 1:" << std::endl;
+    matrix1.display();
+
+    std::cout << "Matrix 2:" << std::endl;
+    matrix2.display();
+
+    SparseMatrix sum = matrix1.add(matrix2);
+    std::cout << "Sum:" << std::endl;
+    sum.display();
+
+    SparseMatrix product = matrix1.multiply(matrix2);
+    std::cout << "Product:" << std::endl;
+    product.display();
+
+    return 0;
+}
