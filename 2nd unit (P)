@@ -1,0 +1,739 @@
+1.Write a C++ program that prints "Hello, World!" using the main function. 
+-#include <iostream>
+
+int main() {
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
+2. Create a program that takes two integers as command line arguments and prints their 
+sum.
+-#include <iostream>
+#include <cstdlib>
+
+int main(int argc, char* argv[]) {
+    if (argc != 3) {
+        std::cerr << "Usage: " << argv[0] << " <num1> <num2>" << std::endl;
+        return 1;
+    }
+
+    int num1 = std::atoi(argv[1]);
+    int num2 = std::atoi(argv[2]);
+
+    int sum = num1 + num2;
+
+    std::cout << "Sum: " << sum << std::endl;
+
+    return 0;
+}
+3. Write a function prototype for a function that calculates the factorial of a number.
+-unsigned long long factorial(int n);
+4.Implement a C++ program with a function prototype for a function that returns the 
+maximum of three numbers.
+-#include <iostream>
+using namespace std;
+
+// Function prototype
+int maxOfThree(int a, int b, int c);
+
+int main() {
+    int num1, num2, num3;
+
+    // Input three numbers
+    cout << "Enter three integers: ";
+    cin >> num1 >> num2 >> num3;
+
+    // Call the function and display the result
+    int maximum = maxOfThree(num1, num2, num3);
+    cout << "The maximum of the three numbers is: " << maximum << endl;
+
+    return 0;
+}
+
+// Function definition
+int maxOfThree(int a, int b, int c) {
+    int max = a;
+    if (b > max) {
+        max = b;
+    }
+    if (c > max) {
+        max = c;
+    }
+    return max;
+}
+5. Write a simple function that calculates the area of a circle.
+-#include <iostream>
+#define PI 3.14159
+using namespace std;
+
+// Function prototype
+double calculateArea(double radius);
+
+int main() {
+    double radius;
+
+    // Get the radius from the user
+    cout << "Enter the radius of the circle: ";
+    cin >> radius;
+
+    // Call the function and display the area
+    double area = calculateArea(radius);
+    cout << "The area of the circle is: " << area << endl;
+
+    return 0;
+}
+
+// Function definition
+double calculateArea(double radius) {
+    return PI * radius * radius;
+}
+6. Implement a function that takes two integers and returns their product.
+-#include <iostream>
+using namespace std;
+
+// Function prototype
+int multiply(int a, int b);
+
+int main() {
+    int num1, num2;
+
+    // Get two integers from the user
+    cout << "Enter two integers: ";
+    cin >> num1 >> num2;
+
+    // Call the multiply function and display the result
+    int product = multiply(num1, num2);
+    cout << "The product of the two numbers is: " << product << endl;
+
+    return 0;
+}
+
+// Function definition
+int multiply(int a, int b) {
+    return a * b;
+}
+7. Create a function that prints the elements of an array. 
+-#include <iostream>
+using namespace std;
+
+// Function prototype
+void printArray(int arr[], int size);
+
+int main() {
+    const int SIZE = 5;
+    int numbers[SIZE] = {10, 20, 30, 40, 50};
+
+    // Call the function to print array elements
+    cout << "Array elements: ";
+    printArray(numbers, SIZE);
+
+    return 0;
+}
+
+// Function definition
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+8. Write a function to swap two integers using call by reference.
+-#include <iostream>
+using namespace std;
+
+// Function prototype
+void swap(int &a, int &b);
+
+int main() {
+    int x = 5, y = 10;
+
+    // Display before swapping
+    cout << "Before swap: x = " << x << ", y = " << y << endl;
+
+    // Call the swap function
+    swap(x, y);
+
+    // Display after swapping
+    cout << "After swap: x = " << x << ", y = " << y << endl;
+
+    return 0;
+}
+9. Implement a function that increments the value of an integer by 10 using call by reference.
+#include <iostream>
+using namespace std;
+
+// Function prototype
+void incrementByTen(int &num);
+
+int main() {
+    int value = 25;
+
+    // Display before increment
+    cout << "Before increment: " << value << endl;
+
+    // Call the function
+    incrementByTen(value);
+
+    // Display after increment
+    cout << "After increment: " << value << endl;
+
+    return 0;
+}
+
+10. Create a function that modifies the elements of an array using call by reference.
+#include <iostream>
+using namespace std;
+
+// Function prototype
+void modifyArray(int arr[], int size);
+
+int main() {
+    const int SIZE = 5;
+    int numbers[SIZE] = {1, 2, 3, 4, 5};
+
+    // Display original array
+    cout << "Original array: ";
+    for (int i = 0; i < SIZE; i++) {
+        cout << numbers[i] << " ";
+    }
+    cout << endl;
+
+    // Modify the array
+    modifyArray(numbers, SIZE);
+
+    // Display modified array
+    cout << "Modified array: ";
+    for (int i = 0; i < SIZE; i++) {
+        cout << numbers[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+
+// Function definition
+void modifyArray(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        arr[i] += 10;  // Add 10 to each element
+    }
+}
+11.. Write an inline function that calculates the square of a number.
+-#include <iostream>
+using namespace std;
+
+// Inline function definition
+inline int square(int num) {
+    return num * num;
+}
+
+int main() {
+    int value;
+
+    // Get input from the user
+    cout << "Enter a number: ";
+    cin >> value;
+
+    // Call the inline function and display the result
+    cout << "Square of " << value << " is: " << square(value) << endl;
+
+    return 0;
+}
+12. Create an inline function that returns the cube of a number.
+-#include <iostream>
+using namespace std;
+
+// Inline function to compute cube
+inline int cube(int num) {
+    return num * num * num;
+}
+
+int main() {
+    int value;
+
+    // Get input from the user
+    cout << "Enter a number: ";
+    cin >> value;
+
+    // Call the inline function and display the result
+    cout << "Cube of " << value << " is: " << cube(value) << endl;
+
+    return 0;
+}
+13. Implement a program that uses an inline function to calculate the sum of two numbers.
+-#include <iostream>
+using namespace std;
+
+// Inline function to calculate sum
+inline int sum(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int num1, num2;
+
+    // Get input from the user
+    cout << "Enter two numbers: ";
+    cin >> num1 >> num2;
+
+    // Call the inline function and display the result
+    cout << "Sum of " << num1 << " and " << num2 << " is: " << sum(num1, num2) << endl;
+
+    return 0;
+}
+14. Write a macro to calculate the square of a number and compare its performance with an 
+inline function.
+-#include <iostream>
+#include <chrono>  // For measuring time
+using namespace std;
+
+// Macro to calculate the square of a number
+#define SQUARE_MACRO(x) ((x) * (x))
+
+// Inline function to calculate the square of a number
+inline int squareInline(int num) {
+    return num * num;
+}
+
+int main() {
+    int value = 100000;
+
+    // Measure performance of the macro
+    auto start_macro = chrono::high_resolution_clock::now();
+    int result_macro = SQUARE_MACRO(value);
+    auto end_macro = chrono::high_resolution_clock::now();
+    chrono::duration<double> duration_macro = end_macro - start_macro;
+    cout << "Macro result: " << result_macro << endl;
+    cout << "Macro execution time: " << duration_macro.count() << " seconds" << endl;
+
+    // Measure performance of the inline function
+    auto start_inline = chrono::high_resolution_clock::now();
+    int result_inline = squareInline(value);
+    auto end_inline = chrono::high_resolution_clock::now();
+    chrono::duration<double> duration_inline = end_inline - start_inline;
+    cout << "Inline function result: " << result_inline << endl;
+    cout << "Inline function execution time: " << duration_inline.count() << " seconds" << endl;
+
+    return 0;
+}
+15. Implement a macro to find the maximum of two numbers and compare it with an inline 
+function.
+-#include <iostream>
+#include <chrono>  // For measuring time
+using namespace std;
+
+// Macro to find the maximum of two numbers
+#define MAX_MACRO(a, b) ((a) > (b) ? (a) : (b))
+
+// Inline function to find the maximum of two numbers
+inline int maxInline(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+int main() {
+    int num1 = 100, num2 = 200;
+
+    // Measure performance of the macro
+    auto start_macro = chrono::high_resolution_clock::now();
+    int result_macro = MAX_MACRO(num1, num2);
+    auto end_macro = chrono::high_resolution_clock::now();
+    chrono::duration<double> duration_macro = end_macro - start_macro;
+    cout << "Macro result: " << result_macro << endl;
+    cout << "Macro execution time: " << duration_macro.count() << " seconds" << endl;
+
+    // Measure performance of the inline function
+    auto start_inline = chrono::high_resolution_clock::now();
+    int result_inline = maxInline(num1, num2);
+    auto end_inline = chrono::high_resolution_clock::now();
+    chrono::duration<double> duration_inline = end_inline - start_inline;
+    cout << "Inline function result: " << result_inline << endl;
+    cout << "Inline function execution time: " << duration_inline.count() << " seconds" << endl;
+
+    return 0;
+}
+16. Write overloaded functions to calculate the area of a circle, rectangle, and triangle.
+-#include <iostream>
+#include <cmath>  // For M_PI constant for circle
+using namespace std;
+
+// Function to calculate the area of a circle
+double area(double radius) {
+    return M_PI * radius * radius;
+}
+
+// Function to calculate the area of a rectangle
+double area(double length, double width) {
+    return length * width;
+}
+
+// Function to calculate the area of a triangle
+double area(double base, double height) {
+    return 0.5 * base * height;
+}
+
+int main() {
+    double radius, length, width, base, height;
+
+    // Get input for the circle
+    cout << "Enter the radius of the circle: ";
+    cin >> radius;
+
+    // Get input for the rectangle
+    cout << "Enter the length and width of the rectangle: ";
+    cin >> length >> width;
+
+    // Get input for the triangle
+    cout << "Enter the base and height of the triangle: ";
+    cin >> base >> height;
+
+    // Call the overloaded functions and display the results
+    cout << "Area of the circle: " << area(radius) << endl;
+    cout << "Area of the rectangle: " << area(length, width) << endl;
+    cout << "Area of the triangle: " << area(base, height) << endl;
+
+    return 0;
+}
+17. Implement overloaded functions to find the maximum of two and three numbers.
+#include <iostream>
+using namespace std;
+
+// Function to find the maximum of two numbers
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+// Function to find the maximum of three numbers
+int max(int a, int b, int c) {
+    return (a > b && a > c) ? a : (b > c ? b : c);
+}
+
+int main() {
+    int num1, num2, num3;
+
+    // Get input for two numbers
+    cout << "Enter two numbers: ";
+    cin >> num1 >> num2;
+
+    // Get input for three numbers
+    cout << "Enter three numbers: ";
+    cin >> num1 >> num2 >> num3;
+
+    // Call the overloaded functions and display the results
+    cout << "Maximum of two numbers: " << max(num1, num2) << endl;
+    cout << "Maximum of three numbers: " << max(num1, num2, num3) << endl;
+
+    return 0;
+}
+18. Implement overloaded functions to find the maximum of two and three numbers.
+-#include <iostream>
+using namespace std;
+
+// Function to find the maximum of two numbers
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+// Function to find the maximum of three numbers
+int max(int a, int b, int c) {
+    return (a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c);
+}
+
+int main() {
+    int num1, num2, num3;
+
+    // Input for two numbers
+    cout << "Enter two numbers: ";
+    cin >> num1 >> num2;
+
+    // Input for three numbers
+    cout << "Enter three numbers: ";
+    cin >> num1 >> num2 >> num3;
+
+    // Call overloaded function for two numbers
+    cout << "Maximum of two numbers: " << max(num1, num2) << endl;
+
+    // Call overloaded function for three numbers
+    cout << "Maximum of three numbers: " << max(num1, num2, num3) << endl;
+
+    return 0;
+}
+19. Create overloaded functions to print different data types (int, float, string).
+-#include <iostream>
+#include <string>
+using namespace std;
+
+// Function to print an integer
+void print(int x) {
+    cout << "Integer: " << x << endl;
+}
+
+// Function to print a float
+void print(float x) {
+    cout << "Float: " << x << endl;
+}
+
+// Function to print a string
+void print(string x) {
+    cout << "String: " << x << endl;
+}
+
+int main() {
+    int num = 10;
+    float pi = 3.14159;
+    string message = "Hello, world!";
+
+    // Call the overloaded print functions
+    print(num);     // Calls the print function for int
+    print(pi);      // Calls the print function for float
+    print(message); // Calls the print function for string
+
+    return 0;
+}
+20. Write a function with default arguments to calculate the compound interest.
+-#include <iostream>
+#include <cmath> // For pow function
+using namespace std;
+
+// Function to calculate compound interest
+double compoundInterest(double principal, double rate = 5.0, int time = 2) {
+    // Formula for compound interest
+    double amount = principal * pow(1 + rate / 100, time);
+    return amount - principal;  // Compound Interest is the total amount minus principal
+}
+
+int main() {
+    double principal;
+    double rate;
+    int time;
+
+    // Get user input for principal, rate, and time
+    cout << "Enter the principal amount: ";
+    cin >> principal;
+    cout << "Enter the rate of interest (default is 5%): ";
+    cin >> rate;
+    cout << "Enter the time (in years) for investment (default is 2 years): ";
+    cin >> time;
+
+    // If rate or time is not provided by the user, default values will be used
+    // Calculate compound interest using the provided or default values
+    double interest = compoundInterest(principal, rate, time);
+
+    cout << "The compound interest is: " << interest << endl;
+
+    return 0;
+}
+21. Implement a function with default arguments to print a greeting message (default name 
+is "Guest").
+-#include <iostream>
+using namespace std;
+
+// Function to print a greeting message with default name "Guest"
+void greet(string name = "Guest") {
+    cout << "Hello, " << name << "!" << endl;
+}
+
+int main() {
+    string user_name;
+
+    // Call greet with default argument
+    greet();  // This will greet "Guest"
+
+    // Ask the user for their name
+    cout << "Enter your name: ";
+    cin >> user_name;
+
+    // Call greet with user-provided name
+    greet(user_name);  // This will greet the user with their name
+
+    return 0;
+}
+22.Create a function that calculates the power of a number with a default exponent of 2.
+#include <iostream>
+#include <cmath> // For pow function (optional)
+using namespace std;
+
+// Function to calculate the power of a number with a default exponent of 2
+double power(double base, int exponent = 2) {
+    return pow(base, exponent);  // Using the pow() function to calculate the power
+}
+
+int main() {
+    double base;
+    int exponent;
+
+    // Ask the user for the base
+    cout << "Enter the base: ";
+    cin >> base;
+
+    // Ask the user if they want to provide an exponent, or use the default value of 2
+    cout << "Enter the exponent (default is 2): ";
+    cin >> exponent;
+
+    // If the user enters a negative number or no number, default value of 2 will be used
+    if(cin.fail()) {
+        cout << "Invalid input for exponent. Using default exponent 2." << endl;
+        cin.clear(); // Clear error flag
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore the remaining input
+        exponent = 2;  // Use the default exponent
+    }
+
+    // Calculate and print the result
+    double result = power(base, exponent);
+    cout << "Result: " << base << " raised to the power of " << exponent << " is " << result << endl;
+
+    return 0;
+}
+23. Write a program to demonstrate the concept of recursive functions. 
+-#include <iostream>
+using namespace std;
+
+// Recursive function to calculate factorial
+int factorial(int n) {
+    // Base case: if n is 0 or 1, return 1
+    if (n == 0 || n == 1) {
+        return 1;
+    } else {
+        // Recursive case: n * factorial of (n-1)
+        return n * factorial(n - 1);
+    }
+}
+
+int main() {
+    int num;
+    
+    // Get user input
+    cout << "Enter a number to calculate its factorial: ";
+    cin >> num;
+    
+    // Call the recursive function
+    int result = factorial(num);
+    
+    // Output the result
+    cout << "Factorial of " << num << " is " << result << endl;
+
+    return 0;
+}
+24. Implement a program that uses an array of function pointers.
+#include <iostream>
+using namespace std;
+
+// Functions to perform basic arithmetic operations
+int add(int a, int b) {
+    return a + b;
+}
+
+int subtract(int a, int b) {
+    return a - b;
+}
+
+int multiply(int a, int b) {
+    return a * b;
+}
+
+int divide(int a, int b) {
+    if (b == 0) {
+        cout << "Error: Division by zero!" << endl;
+        return 0;
+    }
+    return a / b;
+}
+
+int main() {
+    // Array of function pointers for arithmetic operations
+    int (*operations[4])(int, int) = {add, subtract, multiply, divide};
+
+    int a, b, choice;
+
+    // Ask the user for input
+    cout << "Enter two numbers: ";
+    cin >> a >> b;
+
+    cout << "\nChoose an operation:\n";
+    cout << "0: Add\n";
+    cout << "1: Subtract\n";
+    cout << "2: Multiply\n";
+    cout << "3: Divide\n";
+    cout << "Enter your choice (0-3): ";
+    cin >> choice;
+
+    // Check for valid choice
+    if (choice >= 0 && choice <= 3) {
+        // Call the selected operation using the function pointer array
+        int result = operations[choice](a, b);
+        cout << "Result: " << result << endl;
+    } else {
+        cout << "Invalid choice!" << endl;
+    }
+
+    return 0;
+}
+25. Create a program to demonstrate the use of function templates.
+#include <iostream>
+using namespace std;
+
+// Function template to find the maximum of two values
+template <typename T>
+T max(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+int main() {
+    int int1 = 10, int2 = 20;
+    float float1 = 10.5, float2 = 20.7;
+    double double1 = 5.3, double2 = 7.8;
+
+    // Call the max function for int
+    cout << "Max of " << int1 << " and " << int2 << " is: " << max(int1, int2) << endl;
+
+    // Call the max function for float
+    cout << "Max of " << float1 << " and " << float2 << " is: " << max(float1, float2) << endl;
+
+    // Call the max function for double
+    cout << "Max of " << double1 << " and " << double2 << " is: " << max(double1, double2) << endl;
+
+    return 0;
+}
+26. Write a program to illustrate the concept of function pointers and callback functions.
+#include <iostream>
+using namespace std;
+
+// Define some operations that can be used as callback functions
+
+// Function for addition
+int add(int a, int b) {
+    return a + b;
+}
+
+// Function for subtraction
+int subtract(int a, int b) {
+    return a - b;
+}
+
+// Function for multiplication
+int multiply(int a, int b) {
+    return a * b;
+}
+
+// Function to perform a calculation using a callback function
+// The callback is the function pointer passed to the function
+void calculate(int a, int b, int (*callback)(int, int)) {
+    int result = callback(a, b);  // Call the function via the pointer
+    cout << "Result: " << result << endl;
+}
+
+int main() {
+    int x = 10, y = 5;
+
+    // Demonstrate using function pointers for different operations
+    cout << "Using addition callback:" << endl;
+    calculate(x, y, add);  // Passing the add function as a callback
+
+    cout << "Using subtraction callback:" << endl;
+    calculate(x, y, subtract);  // Passing the subtract function as a callback
+
+    cout << "Using multiplication callback:" << endl;
+    calculate(x, y, multiply);  // Passing the multiply function as a callback
+
+    return 0;
+}
+
+
+
