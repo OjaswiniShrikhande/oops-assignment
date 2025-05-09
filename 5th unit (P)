@@ -1,0 +1,861 @@
+1. Write a program to perform basic input and output using streams (cin and cout). 
+#include <iostream>
+using namespace std;
+
+int main() {
+    // Declare variables
+    int age;
+    string name;
+
+    // Prompt user for input
+    cout << "Enter your name: ";
+    cin >> name;
+    cout << "Enter your age: ";
+    cin >> age;
+
+    // Output the entered information
+    cout << "Hello, " << name << "! You are " << age << " years old." << endl;
+
+    return 0;
+}
+2. Create a program that reads and displays multiple lines of text using cin and cout.
+#include <iostream>
+#include <string>
+#include <vector>
+
+int main() {
+    std::vector<std::string> lines;
+    std::string line;
+
+    std::cout << "Enter multiple lines of text (Ctrl+D to finish on Unix, Ctrl+Z on Windows):\n";
+
+    // Read lines until end-of-file (EOF) is encountered
+    while (std::getline(std::cin, line)) {
+        lines.push_back(line);
+    }
+
+    std::cout << "\nYou entered the following lines:\n";
+    for (const auto& l : lines) {
+        std::cout << l << '\n';
+    }
+
+    return 0;
+}
+3.. Implement a program that uses streams to read integers from the user and display their 
+sum. 
+#include <iostream>
+using namespace std;
+
+int main() {
+    int num, sum = 0;
+    char choice;
+
+    cout << "Enter integers to sum. Press 'n' to stop.\n";
+
+    do {
+        cout << "Enter an integer: ";
+        cin >> num;
+        sum += num;
+
+        cout << "Do you want to enter another number? (y/n): ";
+        cin >> choice;
+    } while (choice == 'y' || choice == 'Y');
+
+    cout << "The total sum is: " << sum << endl;
+    return 0;
+}
+4. Write a program to input and output various data types using cin and cout.
+#include <iostream>
+#include <string>
+#include <limits>
+using namespace std;
+
+int main() {
+    // Declare variables for different data types
+    int integerVar;
+    float floatVar;
+    double doubleVar;
+    char charVar;
+    string stringVar;
+    bool boolVar;
+
+    // Input and Output for Integer
+    cout << "Enter an integer: ";
+    cin >> integerVar;
+    cout << "You entered the integer: " << integerVar << endl;
+
+    // Input and Output for Float
+    cout << "Enter a float: ";
+    cin >> floatVar;
+    cout << "You entered the float: " << floatVar << endl;
+
+    // Input and Output for Double
+    cout << "Enter a double: ";
+    cin >> doubleVar;
+    cout << "You entered the double: " << doubleVar << endl;
+
+    // Input and Output for Character
+    cout << "Enter a character: ";
+    cin >> charVar;
+    cout << "You entered the character: " << charVar << endl;
+
+    // Clear input buffer before reading a line of text
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    // Input and Output for String
+    cout << "Enter a string: ";
+    getline(cin, stringVar);
+    cout << "You entered the string: " << stringVar << endl;
+
+    // Input and Output for Boolean
+    cout << "Enter a boolean value (1 for true, 0 for false): ";
+    cin >> boolVar;
+    cout << "You entered the boolean: " << boolalpha << boolVar << endl;
+
+    return 0;
+}
+5. Create a program that formats output using manipulators such as setw, setprecision, and 
+f ixed.
+#include <iostream>
+#include <iomanip>  // For setw, setprecision, fixed
+using namespace std;
+
+int main() {
+    // Integer and floating-point variables
+    int integerVar = 123;
+    double doubleVar = 3.14159265358979;
+
+    // Demonstrating setw and setfill
+    cout << "Formatted Integer Output:\n";
+    cout << "Default width: " << integerVar << endl;
+    cout << "Width 10 with fill character '*': " << setw(10) << setfill('*') << integerVar << endl;
+
+    // Demonstrating setprecision and fixed
+    cout << "\nFormatted Floating-Point Output:\n";
+    cout << "Default precision: " << doubleVar << endl;
+    cout << "Precision 5: " << setprecision(5) << doubleVar << endl;
+    cout << "Fixed format with precision 5: " << fixed << setprecision(5) << doubleVar << endl;
+
+    return 0;
+}
+6. Implement a program that reads user input for name, age, and salary, and then displays 
+the information using formatted output.
+#include <iostream>
+#include <iomanip>  // For setw, setprecision, fixed
+#include <string>
+using namespace std;
+
+int main() {
+    // Declare variables
+    string name;
+    int age;
+    double salary;
+
+    // Input user data
+    cout << "Enter your name: ";
+    getline(cin, name);
+    cout << "Enter your age: ";
+    cin >> age;
+    cout << "Enter your salary: ";
+    cin >> salary;
+
+    // Display formatted output
+    cout << "\n--- Employee Information ---\n";
+    cout << left << setw(15) << "Name:" << name << endl;
+    cout << setw(15) << "Age:" << age << endl;
+    cout << setw(15) << "Salary:" << fixed << setprecision(2) << salary << endl;
+
+    return 0;
+}
+7.Write a program to demonstrate the use of ifstream and ofstream for file input and output. 
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int main() {
+    // Writing to a file using ofstream
+    std::ofstream outFile("example.txt");
+    if (!outFile) {
+        std::cerr << "Error opening file for writing.\n";
+        return 1;
+    }
+    outFile << "Hello, world!\n";
+    outFile << "This is a test file.\n";
+    outFile.close();
+
+    // Reading from the file using ifstream
+    std::ifstream inFile("example.txt");
+    if (!inFile) {
+        std::cerr << "Error opening file for reading.\n";
+        return 1;
+    }
+    std::string line;
+    while (std::getline(inFile, line)) {
+        std::cout << line << '\n';
+    }
+    inFile.close();
+
+    return 0;
+}
+8. Implement a program that reads a list of integers from a file and displays them on the 
+console. 
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+int main() {
+    // Open the file for reading
+    std::ifstream inputFile("numbers.txt");
+
+    // Check if the file was successfully opened
+    if (!inputFile) {
+        std::cerr << "Error opening file for reading.\n";
+        return 1;
+    }
+
+    // Vector to store the integers
+    std::vector<int> numbers;
+    int number;
+
+    // Read integers from the file
+    while (inputFile >> number) {
+        numbers.push_back(number);
+    }
+
+    // Close the file
+    inputFile.close();
+
+    // Display the integers
+    std::cout << "Numbers read from the file:\n";
+    for (int num : numbers) {
+        std::cout << num << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+9. Create a program that writes a list of strings to a file.
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+
+int main() {
+    // List of strings to write to the file
+    std::vector<std::string> lines = {
+        "Hello, world!",
+        "This is a test file.",
+        "C++ file handling is straightforward.",
+        "Each line will be written to the file."
+    };
+
+    // Open the file for writing
+    std::ofstream outFile("output.txt");
+
+    // Check if the file was opened successfully
+    if (!outFile) {
+        std::cerr << "Error opening file for writing.\n";
+        return 1;
+    }
+
+    // Write each string from the list to the file
+    for (const auto& line : lines) {
+        outFile << line << '\n';
+    }
+
+    // Close the file
+    outFile.close();
+
+    std::cout << "Data successfully written to 'output.txt'.\n";
+    return 0;
+}
+10. Write a program to demonstrate unformatted input and output using get and put 
+functions. 
+#include <iostream>
+
+int main() {
+    char ch;
+
+    // Prompt user for a character input
+    std::cout << "Enter a character: ";
+    ch = std::cin.get();  // Read a single character
+
+    // Output the character using put()
+    std::cout << "You entered: ";
+    std::cout.put(ch);  // Display the character
+    std::cout << std::endl;
+
+    return 0;
+}
+11. Implement a program that reads and writes characters using get and put. 
+#include <iostream>
+
+int main() {
+    char ch;
+
+    // Prompt user for a character input
+    std::cout << "Enter a character: ";
+    ch = std::cin.get();  // Read a single character
+
+    // Output the character using put()
+    std::cout << "You entered: ";
+    std::cout.put(ch);  // Display the character
+    std::cout << std::endl;
+
+    return 0;
+}
+12.Create a program that uses formatted input and output to display a table of data.
+#include <iostream>
+#include <iomanip>
+
+int main() {
+    // Setting up the table headers
+    std::cout << std::left
+              << std::setw(15) << "Product"
+              << std::setw(10) << "Quantity"
+              << std::setw(10) << "Price"
+              << std::setw(10) << "Total"
+              << std::endl;
+
+    // Table separator
+    std::cout << std::setfill('-') << std::setw(45) << "" << std::endl;
+    std::cout << std::setfill(' '); // Reset fill character
+
+    // Sample data
+    struct Item {
+        std::string name;
+        int quantity;
+        double price;
+    };
+
+    Item items[] = {
+        {"Apples", 10, 0.99},
+        {"Bananas", 5, 1.29},
+        {"Cherries", 20, 2.49},
+        {"Dates", 15, 3.59}
+    };
+
+    // Displaying the table rows
+    for (const auto& item : items) {
+        double total = item.quantity * item.price;
+        std::cout << std::left
+                  << std::setw(15) << item.name
+                  << std::setw(10) << item.quantity
+                  << std::setw(10) << std::fixed << std::setprecision(2) << item.price
+                  << std::setw(10) << total
+                  << std::endl;
+    }
+
+    return 0;
+}
+13. Write a program that uses getline to read a full line of text and display it. 
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string input;
+
+    // Prompt the user for input
+    std::cout << "Enter a line of text: ";
+
+    // Use std::getline to read the entire line, including spaces
+    std::getline(std::cin, input);
+
+    // Display the input
+    std::cout << "You entered: " << input << std::endl;
+
+    return 0;
+}
+14.#include <iostream>
+#include <iomanip>  // For std::setprecision, std::fixed, std::setw
+
+int main() {
+    double number = 3.14159265359;
+
+    // Default precision (6 significant digits)
+    std::cout << "Default precision: " << number << std::endl;
+
+    // Fixed-point notation with 2 decimal places
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "Fixed-point (2 decimals): " << number << std::endl;
+
+    // Fixed-point notation with 5 decimal places
+    std::cout << std::setprecision(5);
+    std::cout << "Fixed-point (5 decimals): " << number << std::endl;
+
+    // Scientific notation with 3 significant digits
+    std::cout << std::scientific << std::setprecision(3);
+    std::cout << "Scientific (3 sig. digits): " << number << std::endl;
+
+    // Reset to default format and precision
+    std::cout << std::defaultfloat << std::setprecision(6);
+    std::cout << "Default format (6 sig. digits): " << number << std::endl;
+
+    // Using setw to format output width
+    std::cout << std::setw(20) << number << std::endl;
+
+    return 0;
+}
+15.Implement a program that uses setw to align text output in columns.
+#include <iostream>
+#include <iomanip>  // For std::setw and std::setfill
+
+int main() {
+    // Column headers
+    std::cout << std::left
+              << std::setw(15) << "Product"
+              << std::setw(10) << "Quantity"
+              << std::setw(10) << "Price"
+              << std::setw(10) << "Total"
+              << std::endl;
+
+    // Separator line
+    std::cout << std::setfill('-') << std::setw(45) << "" << std::endl;
+    std::cout << std::setfill(' ');  // Reset fill character
+
+    // Sample data
+    struct Item {
+        std::string name;
+        int quantity;
+        double price;
+    };
+
+    Item items[] = {
+        {"Apples", 10, 0.99},
+        {"Bananas", 5, 1.29},
+        {"Cherries", 20, 2.49},
+        {"Dates", 15, 3.59}
+    };
+
+    // Displaying the table rows
+    for (const auto& item : items) {
+        double total = item.quantity * item.price;
+        std::cout << std::left
+                  << std::setw(15) << item.name
+                  << std::setw(10) << item.quantity
+                  << std::setw(10) << std::fixed << std::setprecision(2) << item.price
+                  << std::setw(10) << total
+                  << std::endl;
+    }
+
+    return 0;
+}
+16. Create a program that uses manipulators to format currency and percentage values. 
+#include <iostream>
+#include <iomanip>  // For std::setprecision, std::fixed, std::showpos, std::put_money
+
+int main() {
+    double price = 1234.5678;
+    double discount = 0.15;
+    double final_price = price * (1 - discount);
+
+    // Set the locale to US for currency formatting
+    std::cout.imbue(std::locale("en_US.UTF-8"));
+
+    // Display the original price as currency
+    std::cout << "Original Price: " << std::showbase << std::put_money(price * 100) << std::endl;
+
+    // Display the discount as percentage
+    std::cout << "Discount: " << std::fixed << std::setprecision(2) << discount * 100 << "%" << std::endl;
+
+    // Display the final price as currency
+    std::cout << "Final Price: " << std::showbase << std::put_money(final_price * 100) << std::endl;
+
+    return 0;
+}
+17. Write a program to read data from a text file and display it on the console. 
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int main() {
+    std::ifstream inputFile("example.txt"); // Open the file for reading
+
+    // Check if the file was opened successfully
+    if (!inputFile) {
+        std::cerr << "Error opening file!" << std::endl;
+        return 1;
+    }
+
+    std::string line;
+    // Read and display the file content line by line
+    while (std::getline(inputFile, line)) {
+        std::cout << line << std::endl;
+    }
+
+    inputFile.close(); // Close the file
+    return 0;
+}
+18.Implement a program to write user input to a text file. 
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int main() {
+    std::ofstream outputFile("user_input.txt"); // Open file for writing
+
+    if (!outputFile) {
+        std::cerr << "Error opening file for writing!" << std::endl;
+        return 1;
+    }
+
+    std::string userInput;
+    std::cout << "Enter text to write to the file (type 'exit' to quit):" << std::endl;
+
+    while (true) {
+        std::getline(std::cin, userInput);
+
+        if (userInput == "exit") {
+            break;
+        }
+
+        outputFile << userInput << std::endl;
+    }
+
+    outputFile.close(); // Close the file
+    std::cout << "User input has been written to 'user_input.txt'." << std::endl;
+
+    return 0;
+}
+19.Create a program that copies the contents of one file to another using file streams.
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int main() {
+    std::string sourceFile, destinationFile;
+
+    // Prompt user for source and destination file names
+    std::cout << "Enter source file name: ";
+    std::cin >> sourceFile;
+    std::cout << "Enter destination file name: ";
+    std::cin >> destinationFile;
+
+    // Open source file for reading
+    std::ifstream src(sourceFile, std::ios::binary);
+    if (!src) {
+        std::cerr << "Error opening source file: " << sourceFile << std::endl;
+        return 1;
+    }
+
+    // Open destination file for writing
+    std::ofstream dest(destinationFile, std::ios::binary);
+    if (!dest) {
+        std::cerr << "Error opening destination file: " << destinationFile << std::endl;
+        return 1;
+    }
+
+    // Copy contents from source to destination
+    dest << src.rdbuf();
+
+    std::cout << "File copied successfully from " << sourceFile << " to " << destinationFile << std::endl;
+
+    return 0;
+}
+20.Write a program that appends new data to an existing file.
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int main() {
+    std::string filename = "data.txt"; // Name of the file to append to
+    std::ofstream outFile(filename, std::ios::app); // Open file in append mode
+
+    if (!outFile) {
+        std::cerr << "Error opening file for appending!" << std::endl;
+        return 1;
+    }
+
+    std::string userInput;
+    std::cout << "Enter text to append to the file (type 'exit' to quit):" << std::endl;
+
+    while (true) {
+        std::getline(std::cin, userInput);
+        if (userInput == "exit") {
+            break;
+        }
+        outFile << userInput << std::endl; // Append user input to the file
+    }
+
+    outFile.close(); // Close the file
+    std::cout << "User input has been appended to '" << filename << "'." << std::endl;
+
+    return 0;
+}
+21.. Write a program that demonstrates the use of exception handling with file operations.
+#include <iostream>
+#include <fstream>
+#include <stdexcept>
+
+int main() {
+    try {
+        // Open the file for reading
+        std::ifstream inputFile("example.txt");
+        if (!inputFile.is_open()) {
+            throw std::runtime_error("Error: Unable to open file for reading.");
+        }
+
+        // Read data from the file
+        std::string line;
+        while (std::getline(inputFile, line)) {
+            std::cout << line << std::endl;
+        }
+
+        // Check for read errors
+        if (inputFile.bad()) {
+            throw std::runtime_error("Error: A non-recoverable error occurred during the read operation.");
+        }
+
+        inputFile.close();
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return 1;
+    }
+
+    try {
+        // Open the file for writing
+        std::ofstream outputFile("output.txt");
+        if (!outputFile.is_open()) {
+            throw std::runtime_error("Error: Unable to open file for writing.");
+        }
+
+        // Write data to the file
+        outputFile << "Hello, world!" << std::endl;
+
+        // Check for write errors
+        if (outputFile.bad()) {
+            throw std::runtime_error("Error: A non-recoverable error occurred during the write operation.");
+        }
+
+        outputFile.close();
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+22. Implement a program that compresses and decompresses text files using simple 
+encoding techniques. 
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
+// Function to compress a file using Run-Length Encoding (RLE)
+void compressFile(const std::string& inputFile, const std::string& outputFile) {
+    std::ifstream in(inputFile, std::ios::binary);
+    std::ofstream out(outputFile, std::ios::binary);
+
+    if (!in || !out) {
+        std::cerr << "Error opening file(s)!" << std::endl;
+        return;
+    }
+
+    char currentChar, prevChar;
+    int count = 1;
+
+    in.get(prevChar); // Read the first character
+
+    while (in.get(currentChar)) {
+        if (currentChar == prevChar && count < 255) {
+            count++;
+        } else {
+            out.put(count);
+            out.put(prevChar);
+            prevChar = currentChar;
+            count = 1;
+        }
+    }
+
+    // Write the last run
+    out.put(count);
+    out.put(prevChar);
+
+    in.close();
+    out.close();
+    std::cout << "File compressed successfully!" << std::endl;
+}
+
+// Function to decompress a file using Run-Length Encoding (RLE)
+void decompressFile(const std::string& inputFile, const std::string& outputFile) {
+    std::ifstream in(inputFile, std::ios::binary);
+    std::ofstream out(outputFile, std::ios::binary);
+
+    if (!in || !out) {
+        std::cerr << "Error opening file(s)!" << std::endl;
+        return;
+    }
+
+    char currentChar;
+    int count;
+
+    while (in.get(count)) {
+        in.get(currentChar);
+        for (int i = 0; i < count; ++i) {
+            out.put(currentChar);
+        }
+    }
+
+    in.close();
+    out.close();
+    std::cout << "File decompressed successfully!" << std::endl;
+}
+
+int main() {
+    std::string inputFile = "example.txt";
+    std::string compressedFile = "compressed.rle";
+    std::string decompressedFile = "decompressed.txt";
+
+    compressFile(inputFile, compressedFile);
+    decompressFile(compressedFile, decompressedFile);
+
+    return 0;
+}
+23.Create a program that uses file streams to merge the contents of multiple text files into a 
+single file. 
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+
+void mergeFiles(const std::vector<std::string>& inputFiles, const std::string& outputFile) {
+    std::ofstream out(outputFile, std::ios::app); // Open output file in append mode
+
+    if (!out) {
+        std::cerr << "Error opening output file: " << outputFile << std::endl;
+        return;
+    }
+
+    for (const auto& inputFile : inputFiles) {
+        std::ifstream in(inputFile);
+
+        if (!in) {
+            std::cerr << "Error opening input file: " << inputFile << std::endl;
+            continue;
+        }
+
+        out << "\n\n--- Start of " << inputFile << " ---\n\n"; // Optional header for each file
+
+        out << in.rdbuf(); // Write the contents of the input file to the output file
+
+        out << "\n\n--- End of " << inputFile << " ---\n\n"; // Optional footer for each file
+
+        in.close();
+    }
+
+    out.close();
+    std::cout << "Files merged successfully into " << outputFile << std::endl;
+}
+
+int main() {
+    std::vector<std::string> inputFiles = {
+        "file1.txt",
+        "file2.txt",
+        "file3.txt"
+    };
+    std::string outputFile = "merged_output.txt";
+
+    mergeFiles(inputFiles, outputFile);
+
+    return 0;
+}
+24.. Write a program that reads and processes large data files using memory-mapped files.
+#include <iostream>
+#include <fstream>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+
+void processLargeFile(const std::string& filename) {
+    // Open the file
+    int fd = open(filename.c_str(), O_RDONLY);
+    if (fd == -1) {
+        perror("Error opening file");
+        return;
+    }
+
+    // Get the size of the file
+    struct stat fileStat;
+    if (fstat(fd, &fileStat) == -1) {
+        perror("Error getting file size");
+        close(fd);
+        return;
+    }
+    size_t fileSize = fileStat.st_size;
+
+    // Memory-map the file
+    char* mappedData = (char*)mmap(NULL, fileSize, PROT_READ, MAP_PRIVATE, fd, 0);
+    if (mappedData == MAP_FAILED) {
+        perror("Error mapping file");
+        close(fd);
+        return;
+    }
+
+    // Process the file (example: print the first 100 characters)
+    for (size_t i = 0; i < std::min(fileSize, (size_t)100); ++i) {
+        std::cout << mappedData[i];
+    }
+    std::cout << std::endl;
+
+    // Unmap the memory and close the file
+    if (munmap(mappedData, fileSize) == -1) {
+        perror("Error unmapping file");
+    }
+    close(fd);
+}
+
+int main() {
+    std::string filename = "largefile.txt";
+    processLargeFile(filename);
+    return 0;
+}
+25.. Implement a program that uses streams to perform basic encryption and decryption of 
+text files.
+#include <iostream>
+#include <fstream>
+#include <string>
+
+class FileEncryptor {
+public:
+    // Encrypts the input file and writes to the output file
+    void encrypt(const std::string& inputFile, const std::string& outputFile, char key) {
+        std::ifstream in(inputFile, std::ios::binary);
+        std::ofstream out(outputFile, std::ios::binary);
+
+        if (!in || !out) {
+            std::cerr << "Error opening files!" << std::endl;
+            return;
+        }
+
+        char ch;
+        while (in.get(ch)) {
+            out.put(ch ^ key); // XOR each byte with the key
+        }
+
+        std::cout << "File encrypted successfully." << std::endl;
+    }
+
+    // Decrypts the input file and writes to the output file
+    void decrypt(const std::string& inputFile, const std::string& outputFile, char key) {
+        encrypt(inputFile, outputFile, key); // XOR is symmetric, so encryption and decryption are the same
+        std::cout << "File decrypted successfully." << std::endl;
+    }
+};
+
+int main() {
+    FileEncryptor fe;
+    std::string inputFile = "example.txt";
+    std::string encryptedFile = "encrypted.txt";
+    std::string decryptedFile = "decrypted.txt";
+    char key = 'K'; // Simple key for XOR operation
+
+    // Encrypt the file
+    fe.encrypt(inputFile, encryptedFile, key);
+
+    // Decrypt the file
+    fe.decrypt(encryptedFile, decryptedFile, key);
+
+    return 0;
+}
